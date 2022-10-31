@@ -1,0 +1,8 @@
+@startuml
+ utilisateur o-- publication
+ utilisateur o-- parcour
+
+ class utilisateur {
+    String publier() 
+ }
+@enduml
