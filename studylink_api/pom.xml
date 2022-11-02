@@ -18,6 +18,7 @@
 	</properties>
 	<dependencies>
 		<!-- ORIKA -->
+		<!-- Mapping des classes entre les différentes couches de l'appli -->
 		<dependency>
 			<groupId>ma.glasnost.orika</groupId>
 			<artifactId>orika-core</artifactId>
@@ -33,7 +34,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- SWAGGER -->
+		<!-- SWAGGER --> 
+		<!-- Visualiser et intéragir avec l'API via navigateur -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
@@ -49,6 +51,15 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		<!-- FIREBASE -->
+		<!-- Connexion à la base de données -->
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>9.1.0</version>
+			<!-- <scope>runtime</scope> -->
+		</dependency>
+		
 	</dependencies>
 
 	<build>
