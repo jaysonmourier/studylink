@@ -1,28 +1,27 @@
 package com.devops.studylink.post.domain.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class Post {
 
     public Post() {}
-    public Post(UUID id, String content, Date creationDate) {
+    public Post(Long id, String content, Date creationDate) {
         this.id = id;
         this.content = content;
         this.creationDate = creationDate;
     }
 
-    private UUID id;
+    private Long id;
     private String content;
     private Date creationDate;
 
     /**| SETTERS & GETTERS |**/
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,28 +1,27 @@
 package com.devops.studylink.post.api.dto;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class PostDto {
 
     public PostDto() {}
-    public PostDto(UUID id, String content, Date creationDate) {
+    public PostDto(Long id, String content, Date creationDate) {
         this.id = id;
         this.content = content;
         this.creationDate = creationDate;
     }
 
-    private UUID id;
+    private Long id;
     private String content;
     private Date creationDate;
 
     /**| SETTERS & GETTERS |**/
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
