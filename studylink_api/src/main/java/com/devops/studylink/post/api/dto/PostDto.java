@@ -1,10 +1,16 @@
 package com.devops.studylink.post.api.dto;
 
-
 import java.util.Date;
 import java.util.UUID;
 
 public class PostDto {
+
+    public PostDto() {}
+    public PostDto(UUID id, String content, Date creationDate) {
+        this.id = id;
+        this.content = content;
+        this.creationDate = creationDate;
+    }
 
     private UUID id;
     private String content;

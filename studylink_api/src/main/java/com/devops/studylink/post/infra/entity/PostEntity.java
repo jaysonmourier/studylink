@@ -9,11 +9,22 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="post")
 public class PostEntity {
 
+    public PostEntity() {}
+    public PostEntity(String content, Date creationDate) {
+        this.content = content;
+        this.creationDate = creationDate;
+    }
+
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name="id")
     private UUID id;
+
+    @Column(name="content")
     private String content;
+
+    @Column(name="creationDate")
     private Date creationDate;
 
     /**| SETTERS & GETTERS |**/

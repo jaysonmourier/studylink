@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.devops.studylink.post.PostMapper;
 import com.devops.studylink.post.api.dto.PostDto;
 import com.devops.studylink.post.domain.PostService;
+import com.devops.studylink.post.domain.model.Post;
 import com.devops.studylink.config.Converter;
 
 @RestController()
@@ -19,6 +22,7 @@ import com.devops.studylink.config.Converter;
 public class PostController {
     
     /**| INIT |**/
+
     private final PostService postService;
     PostController( PostService p ) {
         this.postService = p;
@@ -28,19 +32,21 @@ public class PostController {
 
     @GetMapping()
     public List<PostDto> getPosts() { 
-        return postService.getPosts().stream().map(p -> new Converter().map(p, PostDto.class))
+        return postService.getPosts().stream().map(p -> PostMapper.createDto(p))
                 .collect(Collectors.toList()); 
     }
 
     @GetMapping("/{uuid}")
     public ResponseEntity<PostDto> getPostById( @PathVariable("uuid") UUID id ) { 
         return postService.getPostById(id)
-            .map(p -> new Converter().map(p, PostDto.class))
+            .map(p -> PostMapper.createDto(p))
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping()
-    public ResponseEntity<PostDto> createPost( @RequestBody PostDto postDto ) { return null ; }
+    public Post createPost( @RequestBody PostDto postDto ) {
+        return postService.createPost( PostMapper.createModelDto(postDto) );
+    }
 
 }

@@ -5,6 +5,13 @@ import java.util.UUID;
 
 public class Post {
 
+    public Post() {}
+    public Post(UUID id, String content, Date creationDate) {
+        this.id = id;
+        this.content = content;
+        this.creationDate = creationDate;
+    }
+
     private UUID id;
     private String content;
     private Date creationDate;

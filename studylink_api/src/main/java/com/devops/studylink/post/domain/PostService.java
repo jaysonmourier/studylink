@@ -17,7 +17,7 @@ public class PostService {
         this.postRepository = p;
     }
 
-    /**| ENDPOINTS |**/
+    /**| METHODS |**/
 
     public List<Post> getPosts() {
         return postRepository.getPosts();
@@ -25,6 +25,11 @@ public class PostService {
 
     public Optional<Post> getPostById(UUID id) {
         return postRepository.getPostById(id);
+    }
+
+    public Post createPost(Post post) {
+        System.out.println("\033[0;31m" + "debug" + "\u001B[0m"); 
+        return postRepository.createPost(post);
     }
     
 }
