@@ -2,6 +2,7 @@ package com.devops.studylink.post.domain;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.springframework.stereotype.Service;
 import com.devops.studylink.post.domain.model.Post;
 import com.devops.studylink.post.infra.PostRepository;
@@ -22,7 +23,7 @@ public class PostService {
         return postRepository.getPosts();
     }
 
-    public Optional<Post> getPostById(Long id) {
+    public Optional<Post> getPostById(UUID id) {
         return postRepository.getPostById(id);
     }
 

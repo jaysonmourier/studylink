@@ -1,6 +1,7 @@
 package com.devops.studylink.post.api;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +34,8 @@ public class PostController {
                 .collect(Collectors.toList()); 
     }
 
-    @GetMapping("/{long}")
-    public ResponseEntity<PostDto> getPostById( @PathVariable("long") Long id ) { 
+    @GetMapping("/{UUID}")
+    public ResponseEntity<PostDto> getPostById( @PathVariable("UUID") UUID id ) { 
         return postService.getPostById(id)
             .map(p -> PostMapper.createDto(p))
             .map(ResponseEntity::ok)

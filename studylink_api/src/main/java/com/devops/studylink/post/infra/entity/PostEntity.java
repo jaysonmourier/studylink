@@ -1,7 +1,10 @@
 package com.devops.studylink.post.infra.entity;
 
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity(name="post")
 @Table(name="post")
@@ -14,9 +17,11 @@ public class PostEntity {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Type(type="uuid-char")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name="id")
-    private Long id;
+    private UUID id;
 
     @Column(name="content")
     private String content;
@@ -26,11 +31,11 @@ public class PostEntity {
 
     /**| SETTERS & GETTERS |**/
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
