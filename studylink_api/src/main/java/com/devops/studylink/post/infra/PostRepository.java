@@ -37,5 +37,9 @@ public class PostRepository {
         PostEntity response = postDao.save(PostMapper.createEntity(post));
         return PostMapper.createModelEntity(response);
     }
+
+    public void deletePost(UUID id) {
+        postDao.delete( postDao.findById(id).get() );
+    }
     
 }

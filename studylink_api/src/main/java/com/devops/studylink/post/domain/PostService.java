@@ -28,8 +28,11 @@ public class PostService {
     }
 
     public Post createPost(Post post) {
-        System.out.println("\033[0;31m" + "debug" + "\u001B[0m"); 
         return postRepository.createPost(post);
+    }
+
+    public void detePost(UUID id) {
+        postRepository.deletePost(id);
     }
     
 }

@@ -51,14 +51,6 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-		<!-- FIREBASE -->
-		<!-- Connexion à Firebase -->
-		<dependency>
-			<groupId>com.google.firebase</groupId>
-			<artifactId>firebase-admin</artifactId>
-			<version>9.1.0</version>
-			<!-- <scope>runtime</scope> -->
-		</dependency>
 		<!-- JPA -->
 		<!-- Connexion à MariaDB -->
 		<dependency>
