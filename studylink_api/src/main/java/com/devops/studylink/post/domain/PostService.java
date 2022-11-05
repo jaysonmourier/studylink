@@ -34,5 +34,11 @@ public class PostService {
     public void detePost(UUID id) {
         postRepository.deletePost(id);
     }
+
+    public void updatePost(UUID id, Post update) {
+        Post post = getPostById(id).get();
+        post.update(update);
+        postRepository.updatePost(id, post);
+    }
     
 }

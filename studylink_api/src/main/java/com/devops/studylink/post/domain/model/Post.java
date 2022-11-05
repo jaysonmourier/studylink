@@ -16,6 +16,13 @@ public class Post {
     private String content;
     private Date creationDate;
 
+    /**| DOMAIN METHODS |**/
+
+    public void update(Post update) {
+        setContent(update.getContent());
+        // setCreationDate(update.getCreationDate()); // ?
+    }
+
     /**| SETTERS & GETTERS |**/
 
     public UUID getId() {
@@ -41,5 +48,5 @@ public class Post {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-
+    
 }

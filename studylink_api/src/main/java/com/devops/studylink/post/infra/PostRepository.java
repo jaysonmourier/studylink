@@ -23,23 +23,25 @@ public class PostRepository {
     /**| METHODS |**/
 
     public List<Post> getPosts() {
-        return postDao.findAll().stream()
-                .map( p -> PostMapper.createModelEntity(p) )
-                .collect( Collectors.toList() );
+        return postDao.findAll().stream().map( p -> PostMapper.createModelEntity(p) ).collect( Collectors.toList() );
     }
 
     public Optional<Post> getPostById(UUID id) {
-        Optional<PostEntity> optionalPostEntity = postDao.findById(id);
-        return optionalPostEntity.map( p -> PostMapper.createModelEntity(p) );
+        return postDao.findById(id).map( p -> PostMapper.createModelEntity(p) );
     }
 
     public Post createPost(Post post) {
-        PostEntity response = postDao.save(PostMapper.createEntity(post));
-        return PostMapper.createModelEntity(response);
+        return PostMapper.createModelEntity(postDao.save(PostMapper.createEntity(post)));
     }
 
     public void deletePost(UUID id) {
         postDao.delete( postDao.findById(id).get() );
+    }
+
+    public void updatePost(UUID id, Post post) {
+        PostEntity save = PostMapper.createEntity(post); 
+        save.setId(id);
+        postDao.save( save );
     }
     
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,13 +48,23 @@ public class PostController {
         return PostMapper.createDto( postService.createPost( PostMapper.createModelDto(postDto) ) );
     }
 
-    @DeleteMapping("{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseEntity deletePost(@PathVariable("uuid") UUID id) {
         
         if (! postService.getPostById(id).isPresent() ) return ResponseEntity.notFound().build();
         
         postService.detePost(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{uuid}")
+    public ResponseEntity updatePost( @PathVariable("uuid") UUID id, @RequestBody PostDto postDto ) {
+
+        if (! postService.getPostById(id).isPresent() ) return ResponseEntity.notFound().build();
+
+        postService.updatePost(id, PostMapper.createModelDto(postDto));
+        return null;
+
     }
 
 }
