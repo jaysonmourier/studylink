@@ -1,5 +1,7 @@
 package com.devops.studylink.post.domain;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,6 +30,8 @@ public class PostService {
     }
 
     public Post createPost(Post post) {
+        Date current =  new Date();
+        post.setCreationDate(current);
         return postRepository.createPost(post);
     }
 
