@@ -2,7 +2,7 @@ package com.devops.studylink.post.domain.model;
 
 import java.util.Date;
 import java.util.UUID;
-import com.devops.studylink.post.exception.InvalidPostContentException;
+import com.devops.studylink.post.exception.PostContentException;
 import com.devops.studylink.post.exception.PostException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,8 +23,8 @@ public class Post {
 
     /**| DOMAIN METHODS |**/
 
-    public void setContent(String content) throws InvalidPostContentException {
-        if ( content == null || content.trim().isEmpty() ) throw new InvalidPostContentException();
+    public void setContent(String content) throws PostContentException {
+        if ( content == null || content.trim().isEmpty() ) throw new PostContentException();
         this.content = content.trim();
     }
 
