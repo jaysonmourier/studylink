@@ -67,7 +67,7 @@
     <groupId>org.postgresql</groupId>
     <artifactId>postgresql</artifactId>
     <version>42.5.0</version>
-</dependency>	
+</dependegitncy>	
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
