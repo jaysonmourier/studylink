@@ -1,5 +1,4 @@
-@startuml
-
+@startuml diagramStudylink
 JpaRepository<|--PostDao
 
  class PostDto {
