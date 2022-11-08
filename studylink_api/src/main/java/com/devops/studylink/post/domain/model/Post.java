@@ -24,7 +24,7 @@ public class Post {
     /**| DOMAIN METHODS |**/
 
     public void setContent(String content) throws InvalidPostContentException {
-        if ( content == null || content.isEmpty() ) throw new InvalidPostContentException();
+        if ( content == null || content.trim().isEmpty() ) throw new InvalidPostContentException();
         this.content = content.trim();
     }
 
