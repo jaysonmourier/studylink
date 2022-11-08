@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.devops.studylink.post.PostMapper;
+import com.devops.studylink.post.api.dto.PostCreationDto;
 import com.devops.studylink.post.api.dto.PostDto;
 import com.devops.studylink.post.domain.PostService;
+import com.devops.studylink.post.exception.PostException;
 
 @RestController()
 @RequestMapping("/posts")
@@ -44,8 +46,13 @@ public class PostController {
     }
 
     @PostMapping()
-    public PostDto createPost( @RequestBody PostDto postDto ) {
-        return PostMapper.createDto( postService.createPost( PostMapper.createModelDto(postDto) ) );
+    public ResponseEntity<PostDto> createPost( @RequestBody PostCreationDto postDto ) { 
+        try {
+            return ResponseEntity.ok (
+                PostMapper.createDto( postService.createPost( PostMapper.createModelDto( postDto ) ) )
+            );
+        }
+        catch( PostException e ) { return ResponseEntity.badRequest().build(); }
     }
 
     @DeleteMapping("/{uuid}")
@@ -58,13 +65,15 @@ public class PostController {
     }
 
     @PatchMapping("/{uuid}")
-    public ResponseEntity updatePost( @PathVariable("uuid") UUID id, @RequestBody PostDto postDto ) {
+    public ResponseEntity<PostDto> updatePost( @PathVariable("uuid") UUID id, @RequestBody PostCreationDto postDto ) {
 
         if (! postService.getPostById(id).isPresent() ) return ResponseEntity.notFound().build();
-
-        postService.updatePost(id, PostMapper.createModelDto(postDto));
-        return null;
-
+        try {
+            return ResponseEntity.ok(
+                PostMapper.createDto( postService.updatePost(id, PostMapper.createModelDto(postDto)) )
+            );
+        }
+        catch(PostException e) { return ResponseEntity.badRequest().build(); }
     }
 
 }

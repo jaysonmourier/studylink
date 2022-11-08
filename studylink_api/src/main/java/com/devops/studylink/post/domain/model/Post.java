@@ -2,13 +2,20 @@ package com.devops.studylink.post.domain.model;
 
 import java.util.Date;
 import java.util.UUID;
+import com.devops.studylink.post.exception.InvalidPostContentException;
+import com.devops.studylink.post.exception.PostException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Post {
+
+    public Post( String content ) throws PostException {
+        setContent( content );
+        this.creationDate = new Date();
+    }
 
     private UUID id;
     private String content;
@@ -16,11 +23,14 @@ public class Post {
 
     /**| DOMAIN METHODS |**/
 
-    public void update(Post update) {
-        setContent(update.getContent());
-        // setCreationDate(update.getCreationDate()); // ?
+    public void setContent(String content) throws InvalidPostContentException {
+        if ( content == null || content.isEmpty() ) throw new InvalidPostContentException();
+        this.content = content.trim();
     }
 
-    // TODO : public void create(Post)
+    // TODO : Ajouter lastUpdateDate
+    public void update(Post update) throws PostException {
+        setContent(update.getContent());
+    }
 
 }
