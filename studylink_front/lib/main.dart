@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studylink_web/widgets/form.dart';
 
 // widgets
 import 'widgets/post.dart';
@@ -20,7 +21,7 @@ class Studylink extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Scaffold(
-        body: Post(),
+        body: FormWidget(),
       )
     );
   }
