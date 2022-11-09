@@ -20,8 +20,15 @@ class Studylink extends StatelessWidget {
         
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(
-        body: FormWidget(),
+      home: Scaffold(
+        body: SafeArea(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            width: 500,
+            child: FormWidget(),
+            alignment: Alignment.center,
+          ),
+        ),
       )
     );
   }
