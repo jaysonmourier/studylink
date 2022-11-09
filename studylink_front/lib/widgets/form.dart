@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'package:studylink_web/models/Post.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,23 +36,37 @@ class FormWidgetState extends State<FormWidget> {
           ),
           ElevatedButton(
               onPressed: (() {
+                print(contentController.text);
                 if (_formKey.currentState!.validate()) {
-                  Future<http.Response> createAlbum(String title) {
-                    return http.post(
-                      Uri.parse('http://localhost:8082/posts'),
-                      headers: <String, String>{
-                        'Content-Type': 'application/json; charset=UTF-8',
-                      },
-                      body: jsonEncode(<String, String>{
-                        'content': contentController.text,
-                      }),
-                    );
-                  }
+                  createPost(contentController.text);
                 }
               }),
               child: const Icon(Icons.send))
         ],
       ),
     );
+  }
+}
+
+Future<Post> createPost(String content) async {
+  print("1");
+  final response = await http.post(
+    Uri.parse('http://localhost:8082/posts'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'content': content,
+    }),
+  );
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return Post.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to create Post.');
   }
 }
