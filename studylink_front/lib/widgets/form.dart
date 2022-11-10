@@ -53,7 +53,7 @@ Future<Post> createPost(String content) async {
   final response = await http.post(
     Uri.parse('http://localhost:8081/posts'),
     headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
+      'Content-Type': 'application/json; charset=UTF-8'
     },
     body: jsonEncode(<String, String>{
       'content': content,
