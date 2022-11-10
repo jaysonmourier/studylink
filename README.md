@@ -1,3 +1,4 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/jaysonmourier/studylink/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/jaysonmourier/studylink/tree/main)
 # studylink
 
 Studylink est une application universitaire pour garder contact avec les anciens étudiants.
