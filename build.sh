@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd studylink_api
 
 ./mvnw clean package
