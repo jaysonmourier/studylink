@@ -9,8 +9,7 @@ then
         if docker info > /dev/null 2>&1;
         then
             cd studylink_api
-            ./mvnw clean package
-            docker build . -t studylink_app
+            ./mvnw clean package -DskipTests
             cd ../studylink_front
             flutter build web
             docker build . -t studylink_front
