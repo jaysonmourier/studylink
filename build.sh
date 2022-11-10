@@ -11,6 +11,10 @@ then
             cd studylink_api
             ./mvnw clean package
             docker build . -t studylink_app
+            cd ../studylink_front
+            flutter build web
+            docker build . -t studylink_front
+            cd ..
             docker-compose up -d
         else
             echo "This script uses docker, and it isn't running - please start docker and try again!"
