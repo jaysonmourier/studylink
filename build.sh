@@ -8,4 +8,4 @@ docker build . -t studylink_app
 
 cd ..
 
-docker-compose up
+docker-compose up -d
