@@ -18,8 +18,7 @@ then
     else
         echo "$MVN not found!"
     fi
-    # check docker installation
-    # check container
+    
 else
 	echo "$DIR directory does not exist."
     echo "Please clone github.com/jaysonmourier/studylink"
