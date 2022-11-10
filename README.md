@@ -8,6 +8,7 @@ Pour simplifier le déploiement, le projet utilise Docker.
 
 ```
 git clone git@github.com:jaysonmourier/studylink.git
+cd studylink
 ```
 
 ```
