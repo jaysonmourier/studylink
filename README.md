@@ -4,6 +4,8 @@ Studylink est une application universitaire pour garder contact avec les anciens
 
 ## Installation
 
+Dépendances : JDK 17, Flutter, Docker
+
 Pour simplifier le déploiement, le projet utilise Docker. 
 
 ```
