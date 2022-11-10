@@ -5,9 +5,26 @@ Studylink est une application universitaire pour garder contact avec les anciens
 
 ## Installation
 
-Dépendances : JDK 17, Flutter, Docker
+### Installer les dépendances
 
-Pour simplifier le déploiement, le projet utilise Docker. 
+Pour faire fonctionner le projet, vous devez avoir certaine dépendance.
+- JDK 17 : https://openjdk.org/projects/jdk/17/
+- Flutter : https://docs.flutter.dev/get-started/install
+- Docker : https://docs.docker.com/get-docker/
+
+⚠️ Il est important d'ajouter Flutter à votre PATH pour le bon fonctionnement du script build.sh !
+
+Linux:
+```
+export PATH="$PATH:$HOME/[path to the directory you have installed flutter]/flutter/bin"
+```
+
+Mac:
+```
+export PATH=[PATH_TO_FLUTTER_GIT_DIRECTORY]/flutter/bin:$PATH
+```
+
+### Cloner et installer le projet
 
 ```
 git clone git@github.com:jaysonmourier/studylink.git
