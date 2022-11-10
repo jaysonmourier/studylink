@@ -1,4 +1,4 @@
-package com.devops.studylink.post.domain.model;
+package com.devops.studylink.post.services.model;
 
 import java.util.Date;
 import java.util.UUID;

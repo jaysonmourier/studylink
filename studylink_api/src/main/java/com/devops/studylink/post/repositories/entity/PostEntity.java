@@ -1,4 +1,4 @@
-package com.devops.studylink.post.infra.entity;
+package com.devops.studylink.post.repositories.entity;
 
 import java.util.Date;
 import java.util.UUID;

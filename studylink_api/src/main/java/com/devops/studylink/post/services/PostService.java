@@ -1,12 +1,13 @@
-package com.devops.studylink.post.domain;
+package com.devops.studylink.post.services;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
-import com.devops.studylink.post.domain.model.Post;
-import com.devops.studylink.post.infra.PostRepository;
+
+import com.devops.studylink.post.repositories.PostRepository;
+import com.devops.studylink.post.services.model.Post;
 
 @Service
 public class PostService {

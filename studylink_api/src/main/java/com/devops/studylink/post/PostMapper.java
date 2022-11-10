@@ -1,8 +1,8 @@
 package com.devops.studylink.post;
 
-import com.devops.studylink.post.api.dto.PostDto;
-import com.devops.studylink.post.domain.model.Post;
-import com.devops.studylink.post.infra.entity.PostEntity;
+import com.devops.studylink.post.controllers.dto.PostDto;
+import com.devops.studylink.post.repositories.entity.PostEntity;
+import com.devops.studylink.post.services.model.Post;
 
 public class PostMapper {
 

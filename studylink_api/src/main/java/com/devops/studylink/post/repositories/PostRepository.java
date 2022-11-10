@@ -1,4 +1,4 @@
-package com.devops.studylink.post.infra;
+package com.devops.studylink.post.repositories;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import com.devops.studylink.post.PostMapper;
-import com.devops.studylink.post.domain.model.Post;
-import com.devops.studylink.post.infra.dao.PostDao;
-import com.devops.studylink.post.infra.entity.PostEntity;
+import com.devops.studylink.post.repositories.dao.PostDao;
+import com.devops.studylink.post.repositories.entity.PostEntity;
+import com.devops.studylink.post.services.model.Post;
 
 @Service
 public class PostRepository {

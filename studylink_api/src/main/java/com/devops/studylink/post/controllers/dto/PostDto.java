@@ -1,4 +1,4 @@
-package com.devops.studylink.post.api.dto;
+package com.devops.studylink.post.controllers.dto;
 
 import java.util.Date;
 import java.util.UUID;
