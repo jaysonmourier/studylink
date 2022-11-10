@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -29,12 +30,14 @@ public class PostController {
 
     /**| ENDPOINTS |**/
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping()
     public List<PostDto> getPosts() { 
         return postService.getPosts().stream().map(p -> PostMapper.createDto(p))
                 .collect(Collectors.toList()); 
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/{uuid}")
     public ResponseEntity<PostDto> getPostById( @PathVariable("uuid") UUID id ) { 
         return postService.getPostById(id)
@@ -43,6 +46,7 @@ public class PostController {
             .orElse(ResponseEntity.notFound().build());
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping()
     public PostDto createPost( @RequestBody PostDto postDto ) {
         return PostMapper.createDto( postService.createPost( PostMapper.createModelDto(postDto) ) );
