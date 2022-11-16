@@ -38,10 +38,10 @@ public class PostRepository {
         postDao.delete( postDao.findById(id).get() );
     }
 
-    public Post updatePost(UUID id, Post post) {
+    public void updatePost(UUID id, Post post) {
         PostEntity save = PostMapper.createEntity(post); 
         save.setId(id);
-        return PostMapper.createModelEntity( postDao.save( save ) );
+        postDao.save( save );
     }
     
 }
