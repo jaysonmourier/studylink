@@ -36,10 +36,10 @@ class FormWidgetState extends State<FormWidget> {
           ),
           ElevatedButton(
               onPressed: (() {
-                contentController.text = " ";
                 print(contentController.text);
                 if (_formKey.currentState!.validate()) {
                   createPost(contentController.text);
+                  contentController.text = "";
                 }
               }),
               child: const Icon(Icons.send))
