@@ -5,12 +5,15 @@ import java.util.UUID;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name="post")
 @Table(name="post")
+@Getter @Setter @NoArgsConstructor
 public class PostEntity {
 
-    public PostEntity() {}
     public PostEntity(String content, Date creationDate) {
         this.content = content;
         this.creationDate = creationDate;
@@ -28,31 +31,5 @@ public class PostEntity {
 
     @Column(name="creationDate")
     private Date creationDate;
-
-    /**| SETTERS & GETTERS |**/
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
 
 }

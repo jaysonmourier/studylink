@@ -3,6 +3,8 @@ package com.devops.studylink.post.controllers;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +16,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.devops.studylink.post.PostMapper;
+<<<<<<< HEAD:studylink_api/src/main/java/com/devops/studylink/post/controllers/PostController.java
 import com.devops.studylink.post.controllers.dto.PostDto;
 import com.devops.studylink.post.services.PostService;
+=======
+import com.devops.studylink.post.api.dto.PostCreationDto;
+import com.devops.studylink.post.api.dto.PostDto;
+import com.devops.studylink.post.domain.PostService;
+import com.devops.studylink.post.exception.PostException;
+>>>>>>> post_crud_api:studylink_api/src/main/java/com/devops/studylink/post/api/PostController.java
 
 @RestController()
 @RequestMapping("/posts")
@@ -48,8 +57,13 @@ public class PostController {
 
     @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping()
-    public PostDto createPost( @RequestBody PostDto postDto ) {
-        return PostMapper.createDto( postService.createPost( PostMapper.createModelDto(postDto) ) );
+    public ResponseEntity createPost( @RequestBody PostCreationDto postDto ) { 
+        try {
+            return ResponseEntity.ok (
+                PostMapper.createDto( postService.createPost( PostMapper.createModelDto( postDto ) ) )
+            );
+        }
+        catch( PostException e ) { return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( e.getMessage() ); }
     }
 
     @DeleteMapping("/{uuid}")
@@ -62,13 +76,15 @@ public class PostController {
     }
 
     @PatchMapping("/{uuid}")
-    public ResponseEntity updatePost( @PathVariable("uuid") UUID id, @RequestBody PostDto postDto ) {
+    public ResponseEntity updatePost( @PathVariable("uuid") UUID id, @RequestBody PostCreationDto postDto ) {
 
         if (! postService.getPostById(id).isPresent() ) return ResponseEntity.notFound().build();
-
-        postService.updatePost(id, PostMapper.createModelDto(postDto));
-        return null;
-
+        try {
+            return ResponseEntity.ok(
+                PostMapper.createDto( postService.updatePost(id, PostMapper.createModelDto(postDto)) )
+            );
+        }
+        catch( PostException e ) { return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( e.getMessage() ); }
     }
 
 }
