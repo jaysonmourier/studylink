@@ -19,7 +19,7 @@ class Studylink extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/':(context) => const FormPage(),
-        '/get':(context) => const PostPage()
+        '/post':(context) => const PostPage()
       },
     );
   }
