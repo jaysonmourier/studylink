@@ -1,16 +1,10 @@
 package com.devops.studylink.post;
 
-<<<<<<< HEAD
+import com.devops.studylink.post.controllers.dto.PostCreationDto;
 import com.devops.studylink.post.controllers.dto.PostDto;
 import com.devops.studylink.post.repositories.entity.PostEntity;
 import com.devops.studylink.post.services.model.Post;
-=======
-import com.devops.studylink.post.api.dto.PostCreationDto;
-import com.devops.studylink.post.api.dto.PostDto;
-import com.devops.studylink.post.domain.model.Post;
 import com.devops.studylink.post.exception.PostException;
-import com.devops.studylink.post.infra.entity.PostEntity;
->>>>>>> post_crud_api
 
 public class PostMapper {
 
