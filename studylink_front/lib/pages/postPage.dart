@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/post.dart';
+
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
 
@@ -13,7 +15,7 @@ class PostPageState extends State<PostPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text('post page'),
+      body: PostWidget(),
     );
   }
 
