@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studylink_web/widgets/form.dart';
+import 'package:studylink_web/widgets/FormWidget.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});

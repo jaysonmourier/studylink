@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/post.dart';
+import '../widgets/PostWidget.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -12,9 +12,13 @@ class PostPage extends StatefulWidget {
 }
 
 class PostPageState extends State<PostPage> {
+  String myurl = Uri.base.toString();
+  String? para1 = Uri.base.queryParameters["id"];
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    String test = para1 ?? "null";
+    return Scaffold(
       body: PostWidget(),
     );
   }
