@@ -1,18 +1,13 @@
 package com.devops.studylink.post.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD:studylink_api/src/main/java/com/devops/studylink/post/services/PostService.java
 
 import com.devops.studylink.post.repositories.PostRepository;
 import com.devops.studylink.post.services.model.Post;
-=======
-import com.devops.studylink.post.domain.model.Post;
-import com.devops.studylink.post.exception.PostException;
-import com.devops.studylink.post.infra.PostRepository;
->>>>>>> post_crud_api:studylink_api/src/main/java/com/devops/studylink/post/domain/PostService.java
 
 @Service
 public class PostService {
@@ -34,7 +29,9 @@ public class PostService {
         return postRepository.getPostById(id);
     }
 
-    public Post createPost(Post post) throws PostException {
+    public Post createPost(Post post) {
+        Date current =  new Date();
+        post.setCreationDate(current);
         return postRepository.createPost(post);
     }
 
@@ -42,10 +39,10 @@ public class PostService {
         postRepository.deletePost(id);
     }
 
-    public Post updatePost(UUID id, Post update) throws PostException {
+    public void updatePost(UUID id, Post update) {
         Post post = getPostById(id).get();
-        post.update( update );
-        return postRepository.updatePost(id, post);
+        post.update(update);
+        postRepository.updatePost(id, post);
     }
     
 }
