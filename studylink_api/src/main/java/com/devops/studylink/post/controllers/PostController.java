@@ -3,6 +3,8 @@ package com.devops.studylink.post.controllers;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,8 +52,11 @@ public class PostController {
 
     @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping()
-    public PostDto createPost( @RequestBody PostDto postDto ) {
-        return PostMapper.createDto( postService.createPost( PostMapper.createModelDto(postDto) ) );
+    public ResponseEntity<PostDto> createPost( @RequestBody PostDto postDto ) {
+        return new ResponseEntity<PostDto> (
+            PostMapper.createDto( postService.createPost( PostMapper.createModelDto(postDto) ) ),
+            HttpStatus.CREATED
+        );
     }
 
     @DeleteMapping("/{uuid}")

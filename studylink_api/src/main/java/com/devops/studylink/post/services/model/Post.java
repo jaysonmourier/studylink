@@ -9,7 +9,7 @@ public class Post {
     public Post(UUID id, String content, Date creationDate) {
         this.id = id;
         this.content = content;
-        this.creationDate = creationDate;
+        this.creationDate = new Date();
     }
 
     private UUID id;

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.devops.studylink.post.PostMapper;
 import com.devops.studylink.post.repositories.dao.PostDao;
@@ -23,7 +24,7 @@ public class PostRepository {
     /**| METHODS |**/
 
     public List<Post> getPosts() {
-        return postDao.findAll().stream().map( p -> PostMapper.createModelEntity(p) ).collect( Collectors.toList() );
+        return postDao.findWithLimit(PageRequest.of(0, 10)).stream().map( p -> PostMapper.createModelEntity(p) ).collect( Collectors.toList() );
     }
 
     public Optional<Post> getPostById(UUID id) {
