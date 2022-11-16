@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:studylink_web/widgets/form.dart';
+import 'package:studylink_web/pages/formPage.dart';
+import 'package:studylink_web/pages/postPage.dart';
 
 // widgets
-import 'widgets/post.dart';
 
 void main() {
+  String myurl = Uri.base.toString();
+  String? para1 = Uri.base.queryParameters["id"];
   runApp(const Studylink());
 }
 
@@ -14,20 +16,11 @@ class Studylink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Studylink',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Scaffold(
-          body: SafeArea(
-              child: Center(
-              child: Container(
-              padding: EdgeInsets.all(20),
-              width: 500,
-              alignment: Alignment.center,
-              child: FormWidget(),
-            ),
-          )),
-        ));
+      initialRoute: '/',
+      routes: {
+        '/':(context) => const FormPage(),
+        '/post':(context) => const PostPage()
+      },
+    );
   }
 }
