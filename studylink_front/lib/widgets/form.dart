@@ -7,6 +7,8 @@ import 'package:studylink_web/models/Post.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:studylink_web/env.dart';
+
 class FormWidget extends StatefulWidget {
   const FormWidget({super.key});
 
@@ -50,9 +52,10 @@ class FormWidgetState extends State<FormWidget> {
 }
 
 Future<Post> createPost(String content) async {
-  print("1");
   final response = await http.post(
-    Uri.parse('http://localhost:8081/posts'),
+    Uri.parse(
+      "${Env.HOST_API}:${Env.HOST_PORT}/posts"
+    ),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8'
     },
@@ -60,14 +63,9 @@ Future<Post> createPost(String content) async {
       'content': content,
     }),
   );
-  print(response.statusCode);
   if (response.statusCode == 200) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
     return Post.fromJson(jsonDecode(response.body));
   } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
     throw Exception('Failed to create Post.');
   }
 }
