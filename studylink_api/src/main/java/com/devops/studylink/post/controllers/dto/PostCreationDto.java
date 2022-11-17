@@ -1,4 +1,4 @@
-package com.devops.studylink.post.dto;
+package com.devops.studylink.post.controllers.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

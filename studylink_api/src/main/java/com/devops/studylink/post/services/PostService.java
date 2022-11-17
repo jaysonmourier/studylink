@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
-
-import com.devops.studylink.exceptions.PostException;
 import com.devops.studylink.post.repositories.PostRepository;
+import com.devops.studylink.post.services.model.Post;
 
 @Service
 public class PostService {
@@ -29,7 +28,9 @@ public class PostService {
         return postRepository.getPostById(id);
     }
 
-    public Post createPost(Post post) throws PostException {
+    public Post createPost(Post post) {
+        Date current =  new Date();
+        post.setCreationDate(current);
         return postRepository.createPost(post);
     }
 
@@ -37,10 +38,10 @@ public class PostService {
         postRepository.deletePost(id);
     }
 
-    public Post updatePost(UUID id, Post update) throws PostException {
+    public void updatePost(UUID id, Post update) {
         Post post = getPostById(id).get();
         post.update(update);
-        return postRepository.updatePost(id, post);
+        postRepository.updatePost(id, post);
     }
     
 }
