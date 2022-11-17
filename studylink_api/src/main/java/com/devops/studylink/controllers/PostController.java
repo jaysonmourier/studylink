@@ -41,11 +41,15 @@ public class PostController {
 
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/{uuid}")
-    public ResponseEntity<PostDto> getPostById( @PathVariable("uuid") UUID id ) { 
-        return postService.getPostById(id)
-            .map(p -> new PostDto(p))
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<PostDto> getPostById( @PathVariable("uuid") String strId ) { 
+        try { 
+            UUID id = UUID.fromString(strId);
+            return postService.getPostById(id)
+                .map(p -> new PostDto(p))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+        } 
+        catch(IllegalArgumentException  e) { return ResponseEntity.notFound().build(); }
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
