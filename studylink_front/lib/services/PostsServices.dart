@@ -16,3 +16,20 @@ Future<Post> getPost(String id) async {
     throw Exception('Failed to get Post.');
   }
 }
+
+Future<Post> createPost(String content) async {
+  final response = await http.post(
+    Uri.parse("${Env.HOST_API}:${Env.HOST_PORT}/posts"),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: jsonEncode(<String, String>{
+      'content': content,
+    }),
+  );
+  if (response.statusCode == 200) {
+    return Post.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to create Post.');
+  }
+}
