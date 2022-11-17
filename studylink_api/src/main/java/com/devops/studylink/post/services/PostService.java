@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.devops.studylink.exceptions.PostException;
+import com.devops.studylink.exceptions.PostNotFoundException;
 import com.devops.studylink.post.repositories.PostRepository;
 
 @Service
@@ -25,20 +26,23 @@ public class PostService {
         return postRepository.getPosts();
     }
 
-    public Optional<Post> getPostById(UUID id) {
-        return postRepository.getPostById(id);
+    public Post getPostById(UUID id) throws PostException {
+        Optional<Post> result = postRepository.getPostById(id);
+        if ( ! result.isPresent() ) throw new PostNotFoundException();
+        return result.get();
     }
 
     public Post createPost(Post post) throws PostException {
         return postRepository.createPost(post);
     }
 
-    public void detePost(UUID id) {
+    public void detePost(UUID id) throws PostException {
+        if ( ! postRepository.getPostById(id).isPresent() ) throw new PostNotFoundException();
         postRepository.deletePost(id);
     }
 
     public Post updatePost(UUID id, Post update) throws PostException {
-        Post post = getPostById(id).get();
+        Post post = this.getPostById(id);
         post.update(update);
         return postRepository.updatePost(id, post);
     }
