@@ -63,9 +63,10 @@ Données étudiantes et anciens miagistes.
 * DELETE /posts/id
 ** ?id ⇒ UUID
 
+=== Diagramme de classe
+
 [plantuml, target=diagram-classes, format=png]
 ....
-@startuml diagramStudylink
 JpaRepository<|--PostDao
 
  class PostDto {
@@ -157,7 +158,6 @@ class StudylinkApplication{
    +main()
    +api() : Docket
 }
- @endumls
 ....
 
 
