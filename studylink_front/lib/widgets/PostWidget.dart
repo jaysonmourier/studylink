@@ -1,10 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-import '../models/Post.dart';
-import 'package:studylink_web/env.dart';
-import 'package:http/http.dart' as http;
+import 'package:studylink_web/services/PostsServices.dart';
 
 class PostWidget extends StatefulWidget {
   String id;
@@ -52,20 +47,5 @@ class PostWidgetState extends State<PostWidget> {
         }
       },
     );
-  }
-}
-
-Future<Post?> getPost(String id) async {
-  final response = await http.get(
-      Uri.parse("${Env.HOST_API}:${Env.HOST_PORT}/posts/$id"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8'
-      });
-  if (response.statusCode == 200) {
-    return Post.fromJson(jsonDecode(response.body));
-  } else if (response.statusCode == 400) {
-    throw Exception('Failed to get Post.');
-  } else {
-    throw Exception('Failed to create Post.');
   }
 }

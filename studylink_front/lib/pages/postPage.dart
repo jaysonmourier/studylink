@@ -11,7 +11,6 @@ class PostPage extends StatelessWidget {
     return Container(
       width: 150,
       child: PostWidget(id: id),
-      );
+    );
   }
-  
 }
