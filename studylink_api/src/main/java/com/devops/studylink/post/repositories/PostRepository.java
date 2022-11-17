@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import com.devops.studylink.post.repositories.entities.PostEntity;
-import com.devops.studylink.post.services.Post;
+import com.devops.studylink.post.PostMapper;
+import com.devops.studylink.post.repositories.dao.PostDao;
+import com.devops.studylink.post.repositories.entity.PostEntity;
+import com.devops.studylink.post.services.model.Post;
 
 @Service
 public class PostRepository {
@@ -22,25 +23,25 @@ public class PostRepository {
     /**| METHODS |**/
 
     public List<Post> getPosts() {
-        return postDao.findWithLimit(PageRequest.of(0, 10)).stream().map( p -> new Post(p) ).collect( Collectors.toList() );
+        return postDao.findAll().stream().map( p -> PostMapper.createModelEntity(p) ).collect( Collectors.toList() );
     }
 
     public Optional<Post> getPostById(UUID id) {
-        return postDao.findById(id).map( p -> new Post(p) );
+        return postDao.findById(id).map( p -> PostMapper.createModelEntity(p) );
     }
 
     public Post createPost(Post post) {
-        return new Post(postDao.save(new PostEntity(post)));
+        return PostMapper.createModelEntity(postDao.save(PostMapper.createEntity(post)));
     }
 
     public void deletePost(UUID id) {
         postDao.delete( postDao.findById(id).get() );
     }
 
-    public Post updatePost(UUID id, Post post) {
-        PostEntity save = new PostEntity(post); 
+    public void updatePost(UUID id, Post post) {
+        PostEntity save = PostMapper.createEntity(post); 
         save.setId(id);
-        return new Post (postDao.save( save ) );
+        postDao.save( save );
     }
     
 }
