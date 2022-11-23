@@ -1,8 +1,9 @@
 package com.devops.studylink.User.service;
 
-import java.sql.Date;
 import java.util.UUID;
+import java.util.Date;
 
+import com.devops.studylink.User.dto.UserCreationDto;
 import com.devops.studylink.User.repository.entities.UserEntity;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +26,24 @@ public class User {
         this.lastname = e.getLastname();
         this.dateNaissance = e.getDateNaissance();
         this.dateCreation = e.getDateCreation();
+    }
+
+    public User(UserCreationDto u){
+        setName(u.getName());
+        setLastName(u.getLastname());
+        setDateNaissance(u.getDateNaissance());
+        this.dateCreation = new Date();
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setLastName(String lastname){
+        this.lastname = lastname;
+    }
+    public void setDateNaissance(Date dateNaissance){
+        this.dateNaissance = dateNaissance;
     }
 
 }

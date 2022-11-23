@@ -25,5 +25,9 @@ public class UserService {
         Optional<User> result = userRepository.getUserById(id);
         return result.get();
     }
+
+    public User createUser(User u) {
+        return userRepository.createUser(u);
+    }
     
 }

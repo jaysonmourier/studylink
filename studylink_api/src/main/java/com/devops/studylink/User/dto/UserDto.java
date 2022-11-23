@@ -1,6 +1,6 @@
 package com.devops.studylink.User.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 import com.devops.studylink.User.repository.entities.UserEntity;
