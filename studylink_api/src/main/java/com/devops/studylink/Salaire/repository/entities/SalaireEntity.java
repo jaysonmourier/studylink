@@ -6,9 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+
+import com.devops.studylink.User.service.User;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +32,10 @@ public class SalaireEntity {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "name")
+    @Type(type = "uuid-char")
+    @Column(name = "user")
+    private UUID user;
+
+    @Column(name = "grossSalary")
     private Double grossSalary;
 }
