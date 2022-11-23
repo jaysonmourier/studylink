@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import com.devops.studylink.User.dto.UserDto;
 import com.devops.studylink.User.service.UserService;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -31,9 +33,9 @@ public class UserController {
 
     @GetMapping("/{uuid}")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<UserDto> getById() {
+    public ResponseEntity<UserDto> getUserById( @PathVariable("uuid") String id ) {
         
-        return null;
+        return ResponseEntity.ok( new UserDto( userService.getUserById( UUID.fromString(id) ) ) );
     }
     
     @PostMapping("")
