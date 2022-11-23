@@ -16,10 +16,10 @@ import lombok.AllArgsConstructor;
 public class Salaire {
 
     private UUID id;
-    private Double name;
+    private Double grossSalary;
 
     public Salaire(SalaireEntity e) {
         this.id = e.getId();
-        this.name = e.getGrossSalary();
+        this.grossSalary = e.getGrossSalary();
     }
 }

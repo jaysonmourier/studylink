@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.devops.studylink.Salaire.dto.SalaireDto;
 import com.devops.studylink.Salaire.service.SalaireService;
 
 @RestController

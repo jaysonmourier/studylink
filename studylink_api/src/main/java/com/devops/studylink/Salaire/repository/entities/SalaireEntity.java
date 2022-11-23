@@ -13,11 +13,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "salaire")
-@Table(name = "salaire")
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "salaire")
+@Entity(name = "salaire")
 public class SalaireEntity {
 
     @Id
