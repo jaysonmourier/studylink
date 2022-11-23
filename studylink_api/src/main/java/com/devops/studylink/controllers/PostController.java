@@ -73,6 +73,7 @@ public class PostController {
         catch(PostException e) { return ResponseEntity.badRequest().body(e.getMessage()); }
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @PatchMapping("/{uuid}")
     public ResponseEntity updatePost( @PathVariable("uuid") String id, @RequestBody PostCreationDto postDto ) {
         try {
