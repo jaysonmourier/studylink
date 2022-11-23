@@ -27,5 +27,5 @@ public class SalaireEntity {
     private UUID id;
 
     @Column(name="name")
-    private Integer grossSalary;
+    private Double grossSalary;
 }

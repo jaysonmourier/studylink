@@ -2,6 +2,8 @@ package com.devops.studylink.Salaire.service;
 
 import java.util.UUID;
 
+import com.devops.studylink.Salaire.repository.entities.SalaireEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -11,11 +13,11 @@ import lombok.AllArgsConstructor;
 public class Salaire {
 
     private UUID id;
-    private String name;
+    private Double name;
 
     public Salaire(SalaireEntity e) {
         this.id = e.getId();
-        this.name = e.getName();
+        this.name = e.getGrossSalary();
     }
 
 }
