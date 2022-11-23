@@ -1,27 +1,36 @@
 @startuml diagramStudylink
-JpaRepository<|--PostDao
 
+JpaRepository<|--PostDao
+PostDto <.. PostController
+PostCreationDto <.. PostController
+PostService <-- PostController
+Post <.. PostService
+PostRepository <-- PostService
+' PostEntity <.. PostDao
+PostEntity <.. PostRepository
+PostDao <-- PostRepository 
+PostController <.. StudylinkApplication
+
+
+class PostCreationDto {
+   -String 
+   +PostCreationDto(String)
+}
+class PostController{
+      -PostService 
+      +PostController(PostService)
+      +getPosts() : List<PostDto>
+      +getPostById(UUID) : ResponseEntity<PostDto>
+      +createPost(PostDto) : PostDto
+      +deletePost(UUID) : ResponseEntity
+      +updatePost(UUID,PostDto ) : ResponseEntity
+   }
+   
  class PostDto {
     -UUID 
     -String 
     -Date 
    +PostDto(UUID, String, Date) 
-   + getId() : UUID
-   +setId(UUID)
-   + getContent() : String
-   +setContent(String)
-   + getCreationDate() : Date
-   +vsetCreationDate(Date)
- }
-
- class PostController{
-    -PostService 
-    +PostController(PostService)
-    +getPosts() : List<PostDto>
-    +getPostById(UUID) : ResponseEntity<PostDto>
-    +createPost(PostDto) : PostDto
-    +deletePost(UUID) : ResponseEntity
-    +updatePost(UUID,PostDto ) : ResponseEntity
  }
 
  class Post{
@@ -30,12 +39,6 @@ JpaRepository<|--PostDao
     -Date
     +Post(UUID, String, Date)
     +update(Post)
-    +getId() : UUID
-    +setId(UUID)
-    +getContent() : String
-    +setContent(String)
-    +getCreationDate() : Date
-    +setCreationDate(Date)
  }
 
  class PostService{
@@ -61,12 +64,6 @@ class PostEntity{
    -String
    -UUID
    +PostEntity(String, Date)
-   +getId() : UUID
-   +getCreationDate() : Date
-   +getContent() : String
-   +setId(UUID)
-   +setContent(String)
-   +setCreationDate(Date)
 }
 
 class PostRepository{
@@ -79,15 +76,8 @@ class PostRepository{
    +updatePost(UUID, Post)
 }
 
-class PostMapper{
-   +{static}createModelDto(PostDto) : Post
-   +{static}createModelEntity(PostEntity) : Post
-   +{static}createDto (Post) PostDto
-   +{static}createEntity(Post) PostEntity
-}
-
 class StudylinkApplication{
    +main()
-   +api() : Docket
+   ' +api() : Docket
 }
  @endumls

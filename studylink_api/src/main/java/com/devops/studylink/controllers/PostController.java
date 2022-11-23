@@ -34,6 +34,8 @@ public class PostController {
 
     /**| ENDPOINTS |**/
 
+    /** POSTS **/
+
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping()
     public List<PostDto> getPosts() { 
@@ -60,7 +62,7 @@ public class PostController {
         }
         catch( PostException e ) { return ResponseEntity.badRequest().body(e.getMessage()); }
     }
-
+    
     @DeleteMapping("/{uuid}")
     public ResponseEntity deletePost(@PathVariable("uuid") String id) {
         try {
@@ -77,6 +79,20 @@ public class PostController {
             return ResponseEntity.ok(
                 new PostDto( postService.updatePost(UUID.fromString(id), new Post(postDto)) )
             );
+        }
+        catch(PostNotFoundException | IllegalArgumentException e) { return ResponseEntity.notFound().build(); }
+        catch(PostException e) { return ResponseEntity.badRequest().body(e.getMessage()); }
+    }
+
+
+    /** LIKES **/
+
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping("/{uuid}/like")
+    public ResponseEntity likePost(@PathVariable String id) {
+        try {
+            this.postService.likePost(UUID.fromString(id));
+            return null;
         }
         catch(PostNotFoundException | IllegalArgumentException e) { return ResponseEntity.notFound().build(); }
         catch(PostException e) { return ResponseEntity.badRequest().body(e.getMessage()); }

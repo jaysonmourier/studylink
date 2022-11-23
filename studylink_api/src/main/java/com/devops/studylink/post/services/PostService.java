@@ -20,7 +20,7 @@ public class PostService {
         this.postRepository = p;
     }
 
-    /**| METHODS |**/
+    /**| POSTS |**/
 
     public List<Post> getPosts() {
         return postRepository.getPosts();
@@ -45,6 +45,12 @@ public class PostService {
         Post post = this.getPostById(id);
         post.update(update);
         return postRepository.updatePost(id, post);
+    }
+
+    /**| LIKES |**/
+
+    public void likePost(UUID id) throws PostException {
+        Post post = getPostById(id);
     }
     
 }
