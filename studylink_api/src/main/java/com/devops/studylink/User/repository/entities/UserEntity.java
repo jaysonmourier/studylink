@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -27,11 +26,11 @@ public class UserEntity {
     @Column(name="id")
     private UUID id;
 
-    @Column(name="forname")
-    private String forname;
-
     @Column(name="name")
     private String name;
+
+    @Column(name="lastname")
+    private String lastname;
 
     @Column(name="dateNaissance")
     private Date dateNaissance;

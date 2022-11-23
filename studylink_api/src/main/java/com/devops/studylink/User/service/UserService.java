@@ -1,6 +1,7 @@
 package com.devops.studylink.User.service;
 
-import com.devops.studylink.Secteur.repository.SecteurRepository;
+import com.devops.studylink.User.repository.UserRepository;
+
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    public UserService(SecteurRepository s) {
+    public UserService(UserRepository s) {
         this.userRepository = s;
     }
     
