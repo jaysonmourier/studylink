@@ -9,7 +9,10 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Salaire {
 
     private UUID id;
@@ -19,5 +22,4 @@ public class Salaire {
         this.id = e.getId();
         this.name = e.getGrossSalary();
     }
-
 }
