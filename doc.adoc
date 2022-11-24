@@ -1,0 +1,163 @@
+= Cahier des spécifications : Studylink
+
+== Synthèse +
+=== Titre  
+Studylink
+ 
+ 
+=== Membre 
+** Jayson Mourier 
+** Dany Abouadaou 
+** Clément de Miribel
+ 
+=== Présentation 
+Nous avons remarqué lors de notre recherche d'idées de projet, de l’inexistence de site ou d’application permettant de mettre en relation les étudiants de Nanterre entre eux, ainsi qu’avec les anciens élèves. L’objectif de cette application est donc de mettre entre relation les anciens élèves de MIAGE Nanterre et les élèves actuels. Cela permettra d’avoir des informations sur les différents stages et mémoires effectués ainsi que les entreprises ayant engagé des étudiants récemment et avec quelle rémunération. Toute l’équipe est très motivée car il s’agit d’un projet qui nous parle et nous concerne directement. Grâce à cela, nous avons une vision dès le départ de l’utilité de cette application. De plus, la concurrence sur ce sujet est inexistante. En effet, notre application visant les miagistes de Nanterre dans un premier temps nous permet de savoir qu’il n’y a aucune concurrence. Cette absence de concurrence nous permet de mettre en place des bases solides pour notre application, sans nous précipiter à vouloir chercher à faire des fonctionnalités très originales afin de nous démarquer de la concurrence.
+
+=== Personas
+
+** Ancien étudiant : Il s’agit d’étudiant ayant été diplômée du master MIAGE de Nanterre 
+
+** Étudiant : Ce sont des étudiants de la MIAGE de Nanterre actuellement  en troisième année de licence ou en Master. 
+
+=== Fonctionnalités
+
+** Envoie de message : Cette fonctionnalité permettra aux différents utilisateurs de pouvoir poster des messages visible par tous.
+
+ 
+=== Prévisions marketing 
+
+Afin de faire connaître l’application nous avons pensé à de nombreuses approches. Tout d’abord, pour contacter les anciens élèves, nous avons pensé à passer par le BDE MIAGE de Nanterre qui a encore les adresses d’anciens élèves. De plus nous avons pensé à aller voir les différentes promotions actuelles de MIAGE et leur présenter notre projet. Et, nous souhaitons mettre des affiches dans les différentes salles de td des MIAGE afin de toucher le plus de gens possibles. Enfin, nous avons pensé à nous adresser aux professeurs de Nanterre , afin de savoir s’ils
+auraient gardé contact avec d'anciens élèves.
+
+== Aspect techniques
+
+=== Type d'application 
+** Web
+
+=== Plateforme technologique
+les langages que nous utilisons sont  java et Dart. Les framework de test utilisé sont Spring Boot et Flutter.
+
+=== Plateforme opérationnelle 
+Le gestionnaire de version que nous avons est Github, pour le buil nous utilisons Maven et ….Pour la CI nous utilisons CircleCI et pour le déploiement nous mettons en place un Docker
+
+=== Acquisition de données 
+Données étudiantes et anciens miagistes.
+
+== Modélisation
+
+=== Descriptif API 
+* GET /posts
+** Obtenir tous les posts
+* GET /posts/id
+** Obtenir le post avec l’identifiant id
+** ?id ⇒ UUID
+* POST /posts
+** Poster un nouveau post
+** ?id ⇒ UUID
+** ?creationDate ⇒ Date
+** ?content ⇒ String
+* PATCH /posts/id
+** Modifier un post existant
+* ?id ⇒ UUID
+** ?content ⇒ String
+* DELETE /posts/id
+** ?id ⇒ UUID
+
+=== Diagramme de classe
+
+[plantuml, target=diagram-classes, format=png]
+....
+JpaRepository<|--PostDao
+
+ class PostDto {
+    -UUID 
+    -String 
+    -Date 
+   +PostDto(UUID, String, Date) 
+   + getId() : UUID
+   +setId(UUID)
+   + getContent() : String
+   +setContent(String)
+   + getCreationDate() : Date
+   +vsetCreationDate(Date)
+ }
+
+ class PostController{
+    -PostService 
+    +PostController(PostService)
+    +getPosts() : List<PostDto>
+    +getPostById(UUID) : ResponseEntity<PostDto>
+    +createPost(PostDto) : PostDto
+    +deletePost(UUID) : ResponseEntity
+    +updatePost(UUID,PostDto ) : ResponseEntity
+ }
+
+ class Post{
+    -UUID
+    -String
+    -Date
+    +Post(UUID, String, Date)
+    +update(Post)
+    +getId() : UUID
+    +setId(UUID)
+    +getContent() : String
+    +setContent(String)
+    +getCreationDate() : Date
+    +setCreationDate(Date)
+ }
+
+ class PostService{
+    -PostRepository
+   +PostService( PostRepository )
+   +getPosts() : List<Post> 
+   +getPostById(UUID) : Optional<Post>
+   +createPost(Post) : Post
+   +detePost(UUID) 
+   +updatePost(UUID, Post)
+ }
+
+interface PostDao{
+
+}
+
+interface JpaRepository{
+
+}
+
+class PostEntity{
+   -Date
+   -String
+   -UUID
+   +PostEntity(String, Date)
+   +getId() : UUID
+   +getCreationDate() : Date
+   +getContent() : String
+   +setId(UUID)
+   +setContent(String)
+   +setCreationDate(Date)
+}
+
+class PostRepository{
+   -PostDao
+   +PostRepository( PostDao)
+   +getPosts() : List<Post>
+   +getPostById(UUID) : Optional<Post> 
+   +createPost(Post) : Post 
+   +deletePost(UUID)
+   +updatePost(UUID, Post)
+}
+
+class PostMapper{
+   +{static}createModelDto(PostDto) : Post
+   +{static}createModelEntity(PostEntity) : Post
+   +{static}createDto (Post) PostDto
+   +{static}createEntity(Post) PostEntity
+}
+
+class StudylinkApplication{
+   +main()
+   +api() : Docket
+}
+....
+
+
