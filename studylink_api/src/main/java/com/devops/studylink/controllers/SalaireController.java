@@ -26,8 +26,9 @@ import com.devops.studylink.exceptions.PostNotFoundException;
 @RestController
 @RequestMapping("/salaire")
 public class SalaireController {
-    
+
     private final SalaireService salaireService;
+
     public SalaireController(SalaireService s) {
         this.salaireService = s;
     }
@@ -42,34 +43,36 @@ public class SalaireController {
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity getById(@PathVariable("uuid") String id) {
         try {
-            return ResponseEntity.ok( new SalaireDto( salaireService.getPostById( UUID.fromString(id) ) ) );
+            return ResponseEntity.ok(new SalaireDto(salaireService.getPostById(UUID.fromString(id))));
+        } catch (PostNotFoundException | IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        } catch (PostException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        catch(PostNotFoundException | IllegalArgumentException e) { return ResponseEntity.notFound().build(); }
-        catch(PostException e) { return ResponseEntity.badRequest().body(e.getMessage()); }
     }
-    
+
     @PostMapping("")
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity create(@RequestBody SalaireCreationDto salaireDto) {
         try {
-            return new ResponseEntity<SalaireDto> (
-                new SalaireDto( salaireService.createSalaire(new Salaire(salaireDto))), HttpStatus.CREATED
-            );
+            return new ResponseEntity<SalaireDto>(
+                    new SalaireDto(salaireService.createSalaire(new Salaire(salaireDto))), HttpStatus.CREATED);
+        } catch (PostException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        catch( PostException e ) { return ResponseEntity.badRequest().body(e.getMessage()); }
     }
 
     @DeleteMapping("/{uuid}")
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<SalaireDto> delete() {
-        
+
         return null;
     }
 
     @PatchMapping("/{uuid}")
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<SalaireDto> update() {
-        
+
         return null;
     }
 

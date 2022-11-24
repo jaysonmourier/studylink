@@ -23,10 +23,10 @@ public class SalaireRepository {
     }
 
     public Optional<Salaire> getPostById(UUID id) {
-        return salaireDao.findById(id).map( p -> new Salaire(p) );
+        return salaireDao.findById(id).map(p -> new Salaire(p));
     }
 
-    public Salaire createPost(Salaire salaire) {
+    public Salaire createSalaire(Salaire salaire) {
         return new Salaire(salaireDao.save(new SalaireEntity(salaire)));
     }
 

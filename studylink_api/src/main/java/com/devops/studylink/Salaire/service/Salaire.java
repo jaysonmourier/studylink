@@ -23,10 +23,11 @@ public class Salaire {
 
     public Salaire(SalaireEntity e) {
         this.id = e.getId();
+        this.user = e.getUser();
         this.grossSalary = e.getGrossSalary();
     }
 
-    public Salaire (SalaireCreationDto p) throws PostException {
+    public Salaire(SalaireCreationDto p) throws PostException {
         this.user = p.getUser();
         this.grossSalary = p.getGrossSalary();
     }
