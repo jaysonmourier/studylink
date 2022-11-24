@@ -17,6 +17,7 @@ public class User {
     private UUID id;
     private String name;
     private String lastname;
+    private String email;
     private Date dateNaissance;
     private Date dateCreation;
 
@@ -24,6 +25,7 @@ public class User {
         this.id = e.getId();
         this.name = e.getName();
         this.lastname = e.getLastname();
+        this.email = e.getEmail();
         this.dateNaissance = e.getDateNaissance();
         this.dateCreation = e.getDateCreation();
     }
@@ -31,6 +33,7 @@ public class User {
     public User(UserCreationDto u){
         setName(u.getName());
         setLastName(u.getLastname());
+        setEmail(u.getEmail());
         setDateNaissance(u.getDateNaissance());
         this.dateCreation = new Date();
     }
@@ -38,6 +41,7 @@ public class User {
     public void update(User update){
         setName(update.getName());
         setLastName(update.getLastname());
+        setEmail(update.getEmail());
         setDateNaissance(update.getDateNaissance());
 
     }
@@ -49,6 +53,11 @@ public class User {
     public void setLastName(String lastname){
         this.lastname = lastname;
     }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
     public void setDateNaissance(Date dateNaissance){
         this.dateNaissance = dateNaissance;
     }

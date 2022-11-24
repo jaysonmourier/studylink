@@ -35,6 +35,9 @@ public class UserEntity {
     @Column(name="lastname")
     private String lastname;
 
+    @Column(name="email")
+    private String email;
+
     @Column(name="dateNaissance")
     private Date dateNaissance;
 
@@ -44,6 +47,7 @@ public class UserEntity {
     public UserEntity(User u) {
         this.name = u.getName();
         this.lastname = u.getLastname();
+        this.email=u.getEmail();
         this.dateNaissance = u.getDateNaissance();
         this.dateCreation = u.getDateCreation();
     }

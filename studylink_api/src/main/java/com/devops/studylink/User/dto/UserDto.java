@@ -17,6 +17,7 @@ public class UserDto {
     private UUID id;
     private String name;
     private String lastname;
+    private String email;
     private Date dateNaissance;
     private Date dateCreation;
 
@@ -24,6 +25,7 @@ public class UserDto {
         this.id = e.getId();
         this.name = e.getName();
         this.lastname = e.getLastname();
+        this.email = e.getEmail();
         this.dateNaissance = e.getDateNaissance();
         this.dateCreation = e.getDateCreation();
     }

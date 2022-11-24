@@ -11,6 +11,7 @@ import lombok.Setter;
 public class UserCreationDto {
     String name;
     String lastname;
+    String email;
     Date dateNaissance;
 
 }
