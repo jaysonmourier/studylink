@@ -1,6 +1,6 @@
 package com.devops.studylink.User.repository.entities;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.devops.studylink.User.service.User;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import lombok.Getter;
@@ -33,11 +36,21 @@ public class UserEntity {
     @Column(name="lastname")
     private String lastname;
 
+    @Column(name="email")
+    private String email;
+
     @Column(name="dateNaissance")
     private Date dateNaissance;
 
     @Column(name="dateCreation")
     private Date dateCreation;
     
+    public UserEntity(User u) {
+        this.name = u.getName();
+        this.lastname = u.getLastname();
+        this.email=u.getEmail();
+        this.dateNaissance = u.getDateNaissance();
+        this.dateCreation = u.getDateCreation();
+    }
 
 }
