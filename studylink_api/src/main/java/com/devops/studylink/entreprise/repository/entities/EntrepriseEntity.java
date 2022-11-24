@@ -1,4 +1,4 @@
-package com.devops.studylink.Secteur.repository.entities;
+package com.devops.studylink.entreprise.repository.entities;
 
 import java.util.UUID;
 import javax.persistence.Column;
@@ -8,18 +8,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import com.devops.studylink.Secteur.service.Secteur;
+
+import com.devops.studylink.entreprise.service.Entreprise;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name="secteur")
-@Table(name="secteur")
-@Getter @Setter @NoArgsConstructor
-public class SecteurEntity {
+@Entity(name="Entreprise")
+@Table(name="Entreprise")
+@Getter @Setter @NoArgsConstructor 
+public class EntrepriseEntity {
 
-    public SecteurEntity(Secteur s) {
-        this.name = s.getName();
+    public EntrepriseEntity(Entreprise e, UUID secteurId) {
+        this.name = e.getName();
+        this.secteurId = secteurId;
     }
 
     @Id
@@ -31,6 +34,7 @@ public class SecteurEntity {
 
     @Column(name="name")
     private String name;
-    
 
+    @Column(name="secteur")
+    private UUID secteurId;
 }
