@@ -34,7 +34,8 @@ public class SalaireService {
     }
 
     public Salaire createSalaire(Salaire salaire) throws HttpStatusCodeException {
-        if((salaire.getUser() == null) || (salaire.getGrossSalary() == null)) throw new HttpServerErrorException(HttpStatus.BAD_REQUEST);
+        if ((salaire.getUser() == null) || (salaire.getGrossSalary() == null))
+            throw new HttpServerErrorException(HttpStatus.BAD_REQUEST);
         return salaireRepository.createSalaire(salaire);
     }
 
