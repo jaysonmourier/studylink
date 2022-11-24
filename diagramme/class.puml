@@ -1,0 +1,93 @@
+@startuml diagramStudylink
+JpaRepository<|--PostDao
+
+ class PostDto {
+    -UUID 
+    -String 
+    -Date 
+   +PostDto(UUID, String, Date) 
+   + getId() : UUID
+   +setId(UUID)
+   + getContent() : String
+   +setContent(String)
+   + getCreationDate() : Date
+   +vsetCreationDate(Date)
+ }
+
+ class PostController{
+    -PostService 
+    +PostController(PostService)
+    +getPosts() : List<PostDto>
+    +getPostById(UUID) : ResponseEntity<PostDto>
+    +createPost(PostDto) : PostDto
+    +deletePost(UUID) : ResponseEntity
+    +updatePost(UUID,PostDto ) : ResponseEntity
+ }
+
+ class Post{
+    -UUID
+    -String
+    -Date
+    +Post(UUID, String, Date)
+    +update(Post)
+    +getId() : UUID
+    +setId(UUID)
+    +getContent() : String
+    +setContent(String)
+    +getCreationDate() : Date
+    +setCreationDate(Date)
+ }
+
+ class PostService{
+    -PostRepository
+   +PostService( PostRepository )
+   +getPosts() : List<Post> 
+   +getPostById(UUID) : Optional<Post>
+   +createPost(Post) : Post
+   +detePost(UUID) 
+   +updatePost(UUID, Post)
+ }
+
+interface PostDao{
+
+}
+
+interface JpaRepository{
+
+}
+
+class PostEntity{
+   -Date
+   -String
+   -UUID
+   +PostEntity(String, Date)
+   +getId() : UUID
+   +getCreationDate() : Date
+   +getContent() : String
+   +setId(UUID)
+   +setContent(String)
+   +setCreationDate(Date)
+}
+
+class PostRepository{
+   -PostDao
+   +PostRepository( PostDao)
+   +getPosts() : List<Post>
+   +getPostById(UUID) : Optional<Post> 
+   +createPost(Post) : Post 
+   +deletePost(UUID)
+   +updatePost(UUID, Post)
+}
+
+class PostMapper{
+   +{static}createModelDto(PostDto) : Post
+   +{static}createModelEntity(PostEntity) : Post
+   +{static}createDto (Post) PostDto
+   +{static}createEntity(Post) PostEntity
+}
+
+class StudylinkApplication{
+   +main()
+   +api() : Docket
+}
+ @endumls

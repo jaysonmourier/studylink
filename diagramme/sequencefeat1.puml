@@ -1,0 +1,5 @@
+@startuml sequencefeat1
+Client -> Server: envoiepost
+Server --> Client: affichepost
+
+@endumls

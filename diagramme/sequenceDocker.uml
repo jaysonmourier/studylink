@@ -1,0 +1,9 @@
+@startuml sequenceDocker
+Client -> Build.sh: Start
+Build.sh -> Docker : Build
+Docker -> Docker: Build conteneur
+Docker --> Build.sh: ok
+Build.sh -> Docker : Start
+Docker -> Docker: Start conteneur
+Docker --> Build.sh: ok 
+@endumls
