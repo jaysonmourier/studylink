@@ -39,8 +39,8 @@ public class JobService {
     }
 
     public Job updateJob(UUID id, Job update){
-        User user = this.getUserById(id);
-        user.update(update);
-        return userRepository.updateJob(id, user);
+        Job job = this.getJobById(id);
+        job.update(update);
+        return jobRepository.updateJob(id, job);
     }
 }

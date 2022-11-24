@@ -36,4 +36,10 @@ public class JobRepository {
         jobDao.delete( jobDao.findById(id).get() );
     }
 
+    public Job updateJob(UUID id, Job job) {
+        JobEntity save = new JobEntity(job); 
+        save.setId(id);
+        return new Job (jobDao.save( save ) );
+    }
+
 }

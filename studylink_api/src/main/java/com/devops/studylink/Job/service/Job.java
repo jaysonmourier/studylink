@@ -30,5 +30,14 @@ public class Job {
         this.user = p.getUser();
         this.name = p.getName();
     }
+
+    public void update(Job update){
+        setName(update.getName());
+
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
     
 }
