@@ -6,13 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import com.devops.studylink.User.service.User;
+import com.devops.studylink.Salaire.service.Salaire;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +22,12 @@ import lombok.Setter;
 @Table(name = "salaire")
 @Entity(name = "salaire")
 public class SalaireEntity {
+
+    public SalaireEntity(Salaire salaire) {
+        this.id = salaire.getId();
+        this.user = salaire.getUser();
+        this.grossSalary = salaire.getGrossSalary();
+    }
 
     @Id
     @Type(type = "uuid-char")
