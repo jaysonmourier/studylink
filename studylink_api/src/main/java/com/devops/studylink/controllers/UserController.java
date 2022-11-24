@@ -55,16 +55,18 @@ public class UserController {
 
     @DeleteMapping("/{uuid}")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<UserDto> delete() {
+    public ResponseEntity deleteUser(@PathVariable("uuid") String id) {
         
-        return null;
+            userService.deteUser( UUID.fromString(id) );
+            return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{uuid}")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<UserDto> update() {
-        
-        return null;
+    public ResponseEntity updateUser( @PathVariable("uuid") String id, @RequestBody UserCreationDto userDto ) {
+            return ResponseEntity.ok(
+                new UserDto( userService.updateUser(UUID.fromString(id), new User(userDto)) )
+            );
     }
 
 }

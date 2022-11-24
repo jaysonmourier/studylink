@@ -28,4 +28,14 @@ public class UserRepository {
         return new User(userDao.save(new UserEntity(u)));
     }
 
+    public void deleteUser(UUID id) {
+        userDao.delete( userDao.findById(id).get() );
+    }
+
+    public User updateUser(UUID id, User user) {
+        UserEntity save = new UserEntity(user); 
+        save.setId(id);
+        return new User (userDao.save( save ) );
+    }
+
 }

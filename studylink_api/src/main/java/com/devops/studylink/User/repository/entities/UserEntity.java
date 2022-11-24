@@ -45,6 +45,7 @@ public class UserEntity {
         this.name = u.getName();
         this.lastname = u.getLastname();
         this.dateNaissance = u.getDateNaissance();
+        this.dateCreation = u.getDateCreation();
     }
 
 }

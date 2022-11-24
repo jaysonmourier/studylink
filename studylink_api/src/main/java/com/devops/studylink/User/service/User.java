@@ -35,6 +35,13 @@ public class User {
         this.dateCreation = new Date();
     }
 
+    public void update(User update){
+        setName(update.getName());
+        setLastName(update.getLastname());
+        setDateNaissance(update.getDateNaissance());
+
+    }
+
     public void setName(String name){
         this.name = name;
     }
