@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import com.devops.studylink.Salaire.service.Salaire;
 import com.devops.studylink.User.service.User;
 
 import lombok.Getter;
@@ -24,6 +25,12 @@ import lombok.Setter;
 @Table(name = "salaire")
 @Entity(name = "salaire")
 public class SalaireEntity {
+
+    public SalaireEntity(Salaire salaire) {
+        this.id = salaire.getId();
+        this.user = salaire.getUser();
+        this.grossSalary = salaire.getGrossSalary();
+    }
 
     @Id
     @Type(type = "uuid-char")

@@ -2,8 +2,9 @@ package com.devops.studylink.Salaire.service;
 
 import java.util.UUID;
 
+import com.devops.studylink.Salaire.dto.SalaireCreationDto;
 import com.devops.studylink.Salaire.repository.entities.SalaireEntity;
-import com.devops.studylink.User.service.User;
+import com.devops.studylink.exceptions.PostException;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +24,10 @@ public class Salaire {
     public Salaire(SalaireEntity e) {
         this.id = e.getId();
         this.grossSalary = e.getGrossSalary();
+    }
+
+    public Salaire (SalaireCreationDto p) throws PostException {
+        this.user = p.getUser();
+        this.grossSalary = p.getGrossSalary();
     }
 }
