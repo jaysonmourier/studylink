@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.devops.studylink.stats.service.StatsService;
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/stats")
@@ -21,10 +21,9 @@ public class StatsController {
         return ResponseEntity.ok( statsService.calculSalaireMoyen() );
     }
 
-    @GetMapping("/salaireEvol") 
-    public List<Integer> salaireEvol() {
-        // TODO : Salaire Evol (Create new query in SalaireDao)
-        return null;
+    @GetMapping("/getGraphSalaireSecteur") 
+    public Map<String, Integer> getGraphSalaireSecteur() {
+        return statsService.getGraphSalaireSecteur();
     }
 
 
