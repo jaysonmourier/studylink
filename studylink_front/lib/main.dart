@@ -25,6 +25,7 @@ class StudylinkState extends State<Studylink> {
   final routeDelegate = BeamerDelegate(
     locationBuilder: RoutesLocationBuilder(routes: {
       '/': (context, state, data) => const HomePage(),
+      '/formulaire': (context, state, data) => const FormulairePage(),
       '/posts': (context, state, data) => const FormPage(),
       '/posts/:id': (context, state, data) {
         final id = state.pathParameters['id']!;
