@@ -3,15 +3,13 @@ package com.devops.studylink.stats.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import com.devops.studylink.Salaire.repository.SalaireRepository;
 import com.devops.studylink.Salaire.service.Salaire;
 import com.devops.studylink.Secteur.repository.SecteurRepository;
 import com.devops.studylink.User.repository.UserRepository;
 import com.devops.studylink.entreprise.repository.EntrepriseRepository;
+import com.devops.studylink.stats.repository.RecordRepository;
 
 @Service
 public class StatsService {
@@ -20,12 +18,14 @@ public class StatsService {
     private final SecteurRepository secteurRepository;
     private final EntrepriseRepository entrepriseRepository;
     private final SalaireRepository salaireRepository;
+    private final RecordRepository recordRepository;
     
-    public StatsService(UserRepository userRepository, SecteurRepository secteurRepository, EntrepriseRepository entrepriseRepository, SalaireRepository salaireRepository) {
+    public StatsService(UserRepository userRepository, SecteurRepository secteurRepository, EntrepriseRepository entrepriseRepository, SalaireRepository salaireRepository, RecordRepository recordRepository ) {
         this.userRepository = userRepository;
         this.secteurRepository = secteurRepository;
         this.entrepriseRepository = entrepriseRepository;
         this.salaireRepository = salaireRepository;
+        this.recordRepository = recordRepository;
     }
 
     public Double calculSalaireMoyen() {
@@ -40,7 +40,7 @@ public class StatsService {
     // Test Dataset for Front graph creation
     public Map<String, Integer> getGraphSalaireSecteur() {
         Map<String, Integer> result = new HashMap<>();
-        result.put( "Agroalimentaire", 41788 );
+        result.put( "Agroalimentaire", 41700 );
         result.put( "Banque & Assurance", 68938 );
         result.put( "Bois - Papier - Carton - Imprimerie", 60510 );
         result.put( "BTP - Matériaux de construction", 49792 );
@@ -60,6 +60,10 @@ public class StatsService {
         result.put( "Textile - Habillement - Chaussure", 60894 );
         result.put( "Transports - Logistique", 36920 );
         return result;
+    }
+
+    public void saveRecord(Record record) {
+        recordRepository.saveRecord( record );
     }    
 
 }
