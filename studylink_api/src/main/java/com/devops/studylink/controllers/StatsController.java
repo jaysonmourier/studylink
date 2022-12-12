@@ -9,7 +9,9 @@ import com.devops.studylink.stats.dto.RecordDto;
 import com.devops.studylink.stats.service.Record;
 import com.devops.studylink.stats.service.StatsService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/stats")
@@ -20,19 +22,33 @@ public class StatsController {
         this.statsService = s;
     }
 
-    @GetMapping("/SalaireMoyen")
-    public ResponseEntity<Double> salaireMoyen() {
-        return ResponseEntity.ok( statsService.calculSalaireMoyen() );
+    /** Salaire moyen **/
+    @GetMapping("/data/salaire-moyen")
+    public ResponseEntity<Float> salaireMoyen() {
+        return ResponseEntity.ok( statsService.getSalaireMoyen() );
     }
 
-    @GetMapping("/GetGraphSalaireSecteur") 
-    public Map<String, Integer> getGraphSalaireSecteur() {
-        return statsService.getGraphSalaireSecteur();
+    /** Top 3 des domaines avec salaires les plus élevés */
+    @GetMapping("/data/top-3-domains") 
+    public Set<String> top3DomainsBySalary() {
+        return statsService.top3DomainsBySalary();
+    }
+
+    /** Salaire moyen selon les secteurs d'activité **/
+    @GetMapping("/barchart/secteur-salaire") 
+    public Map<String, Float> barchartSecteurSalaire() {
+        return statsService.barchartSecteurSalaire();
+    }
+
+    /** Liste des salaires par secteur d'activité **/
+    @GetMapping("/histogram/secteur-salaires")
+    public Map<String, List<Float>> histogramSecteurSalaire() {
+        return statsService.histogramSecteurSalaire();
     }
 
     @PostMapping("/SaveRecord")
     public ResponseEntity<RecordDto> saveRecord( @RequestBody RecordDto record ) {
-        statsService.saveRecord( new Record( record ) );
+        statsService.saveRecord( Record.create( record ) );
         return ResponseEntity.ok( record );
     }
 

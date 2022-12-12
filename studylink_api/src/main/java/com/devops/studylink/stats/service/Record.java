@@ -3,24 +3,15 @@ package com.devops.studylink.stats.service;
 import java.util.List;
 
 import com.devops.studylink.stats.dto.RecordDto;
+import com.devops.studylink.stats.repository.entities.RecordEntity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Record {
-    
-    /** DTO Mapping **/
-    public Record( RecordDto r ) {
-        this.firstJobDelay = r.getFirstJobDelay();
-        this.firstGrossSalary = r.getFirstGrossSalary();
-        this.sameCompany = r.isSameCompany();
-        this.currentJobDelay = r.getCurrentJobDelay();
-        this.currentGrossSalary = r.getCurrentGrossSalary();
-        this.currentCompanyDomain = r.getCurrentCompanyDomain();
-        this.currentCompanySize = r.getCurrentCompanySize();
-        // this.skills = r.getSkills();
-    }
 
     /** First Job **/
     private int firstJobDelay;
@@ -35,5 +26,29 @@ public class Record {
 
     /** Employee **/
     // private List<String> skills;
+
+    /** Mapping **/
+    public static Record create( RecordDto r ) {
+        return new Record( 
+            r.getFirstJobDelay(),
+            r.getFirstGrossSalary(),
+            r.isSameCompany(),
+            r.isSameCompany() ? r.getFirstJobDelay() : r.getCurrentJobDelay(),
+            r.isSameCompany() ? r.getFirstGrossSalary() : r.getCurrentGrossSalary(),
+            r.getCurrentCompanyDomain(),
+            r.getCurrentCompanySize()
+        );
+    }
+    public static Record create( RecordEntity r ) {
+        return new Record( 
+            r.getFirstJobDelay(),
+            r.getFirstGrossSalary(),
+            r.isSameCompany(),
+            r.getCurrentJobDelay(),
+            r.getCurrentGrossSalary(),
+            r.getCurrentCompanyDomain(),
+            r.getCurrentCompanySize()
+        );
+    }
 
 }

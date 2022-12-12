@@ -1,5 +1,7 @@
 package com.devops.studylink.stats.repository;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import com.devops.studylink.stats.repository.entities.RecordEntity;
 import com.devops.studylink.stats.service.Record;
@@ -14,5 +16,8 @@ public class RecordRepository {
     }
     public void saveRecord(Record record) {
         recordDao.save( new RecordEntity( record ) );
+    }
+    public List<Record> getRecords() {
+        return recordDao.findAll().stream().map( r -> Record.create(r) ).collect(Collectors.toList());
     }
 }

@@ -8,11 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import com.devops.studylink.stats.service.Record;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name="record") @Table(name="record")
-@Getter @Setter
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class RecordEntity {
     
     public RecordEntity( Record r ) {
