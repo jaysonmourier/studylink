@@ -1,15 +1,21 @@
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
-
 
 class FormulaireWidget extends StatefulWidget {
   const FormulaireWidget({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget>  createState() {
+  State<StatefulWidget> createState() {
     return FormulaireWidgetState();
   }
 }
+
+enum Premierjob { tresrapide, rapide, moyen, lent }
+
+enum MemeEntreprise { oui, non }
+
+enum TailleEntreprise { trespetite, petite, moyenne, grande }
 
 class FormulaireWidgetState extends State<FormulaireWidget> {
   String? dropDownValue;
@@ -37,6 +43,32 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
     super.dispose();
   }
 
+  Premierjob? _dureepremierjob = Premierjob.tresrapide;
+  MemeEntreprise? _memeentreprise = MemeEntreprise.oui;
+  TailleEntreprise? _tailleentreprise = TailleEntreprise.trespetite;
+  final List<String> _secteur = [
+    'Agroalimentaire',
+    'Banque & Assurance',
+    'Bois - Papier - Carton - Imprimerie',
+    'BTP - Matériaux de construction',
+    'Chimie - Parachimie',
+    'Commerce - Négoce - Distribution',
+    'Edition - Communication - Multimédia',
+    'Électronique - Électricité',
+    'Études & Conseils',
+    'Industrie',
+    'Pharmaceutique',
+    'Informatique - Télécoms',
+    'Machines & Équipements',
+    'Automobile',
+    'Métallurgie',
+    'Services aux Entreprises',
+    'Textile - Habillement - Chaussure',
+    'Transports - Logistique'
+  ];
+
+  // the selected value
+  String? _selectedsecteur;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,12 +77,8 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
         automaticallyImplyLeading: false,
         title: Text(
           'Formulaire',
-          style:( 
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontSize: 22,
-              ),
         ),
+        actions: [],
         centerTitle: false,
         elevation: 2,
       ),
@@ -124,32 +152,77 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
                 Text(
                   'Combien de temps avez-vous mis pour trouver votre premier travail après l\'obtention de votre diplôme?',
                 ),
-                // FlutterFlowRadioButton(
-                //   options: [
-                //     'Entre 0 et 3 mois',
-                //     'Entre 3 et 6 mois',
-                //     'Entre 6 et 9 mois',
-                //     'Supérieur à 9 mois'
-                //   ].toList(),
-                //   initialValue: 'Supérieur à 9 mois',
-                //   onChanged: (val) => setState(() => radioButtonValue1 = val),
-                //   optionHeight: 25,
-                //   textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                //         fontFamily: 'Poppins',
-                //         color: Colors.black,
-                //       ),
-                //   buttonPosition: RadioButtonPosition.left,
-                //   direction: Axis.vertical,
-                //   radioButtonColor: Colors.blue,
-                //   inactiveRadioButtonColor: Color(0x8A000000),
-                //   toggleable: false,
-                //   horizontalAlignment: WrapAlignment.start,
-                //   verticalAlignment: WrapCrossAlignment.start,
-                // ),
+                Row(
+                  children: <Widget>[
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        /// Just an example, but this makes sure, that since you set a fixed width like 300.0, on small screens this won't get too big. For example by setting a maxWidth constraint like this, its width will be 300.0, but at max as big as 1 / 3 of the screen width so it gets smaller on small screen sizes
+                        maxWidth: MediaQuery.of(context).size.width / 3,
+                      ),
+                      child: SizedBox(
+                        /// Enter your fixed width here, 300.0 ist just an example
+                        width: 300.0,
+                        child: ListTile(
+                          title: const Text('0-3 mois'),
+                          leading: Radio<Premierjob>(
+                            value: Premierjob.tresrapide,
+                            groupValue: _dureepremierjob,
+                            onChanged: (Premierjob? value) {
+                              setState(() {
+                                _dureepremierjob = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: const Text('3-6 mois'),
+                        leading: Radio<Premierjob>(
+                          value: Premierjob.rapide,
+                          groupValue: _dureepremierjob,
+                          onChanged: (Premierjob? value) {
+                            setState(() {
+                              _dureepremierjob = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: const Text('6-9 mois'),
+                        leading: Radio<Premierjob>(
+                          value: Premierjob.moyen,
+                          groupValue: _dureepremierjob,
+                          onChanged: (Premierjob? value) {
+                            setState(() {
+                              _dureepremierjob = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: const Text('Supérieur à 9 mois'),
+                        leading: Radio<Premierjob>(
+                          value: Premierjob.lent,
+                          groupValue: _dureepremierjob,
+                          onChanged: (Premierjob? value) {
+                            setState(() {
+                              _dureepremierjob = value;
+                            });
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
                 Divider(),
                 Text(
-                  'Salaire brut annuel du premier travail  (en€)',
-                  
+                  'Salaire brut annuel du premier travail (en €)',
                 ),
                 TextFormField(
                   controller: textController2,
@@ -198,31 +271,54 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
                       ),
                     ),
                   ),
-                  
                 ),
+                Divider(),
                 Text(
                   'Êtes-vous encore dans cette entreprise ?',
                 ),
-                // FlutterFlowRadioButton(
-                //   options: ['Oui', 'Non'].toList(),
-                //   onChanged: (val) => setState(() => radioButtonValue2 = val),
-                //   optionHeight: 25,
-                //   textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                //         fontFamily: 'Poppins',
-                //         color: Colors.black,
-                //       ),
-                //   buttonPosition: RadioButtonPosition.left,
-                //   direction: Axis.vertical,
-                //   radioButtonColor: Colors.blue,
-                //   inactiveRadioButtonColor: Color(0x8A000000),
-                //   toggleable: false,
-                //   horizontalAlignment: WrapAlignment.start,
-                //   verticalAlignment: WrapCrossAlignment.start,
-                // ),
+                Row(
+                  children: <Widget>[
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        /// Just an example, but this makes sure, that since you set a fixed width like 300.0, on small screens this won't get too big. For example by setting a maxWidth constraint like this, its width will be 300.0, but at max as big as 1 / 3 of the screen width so it gets smaller on small screen sizes
+                        maxWidth: MediaQuery.of(context).size.width / 3,
+                      ),
+                      child: SizedBox(
+                        /// Enter your fixed width here, 300.0 ist just an example
+                        width: 300.0,
+                        child: ListTile(
+                          title: const Text('oui'),
+                          leading: Radio<MemeEntreprise>(
+                            value: MemeEntreprise.oui,
+                            groupValue: _memeentreprise,
+                            onChanged: (MemeEntreprise? value) {
+                              setState(() {
+                                _memeentreprise = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: const Text('non'),
+                        leading: Radio<MemeEntreprise>(
+                          value: MemeEntreprise.non,
+                          groupValue: _memeentreprise,
+                          onChanged: (MemeEntreprise? value) {
+                            setState(() {
+                              _memeentreprise = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Divider(),
                 Text(
                   'Salaire brut annuel dans votre entreprise actuelle (en  €)',
-                  style: FlutterFlowTheme.of(context).bodyText1,
                 ),
                 TextFormField(
                   controller: textController3,
@@ -230,7 +326,6 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     hintText: 'Ex : 29876',
-                    hintStyle: FlutterFlowTheme.of(context).bodyText2,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Color(0x00000000),
@@ -272,99 +367,133 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
                       ),
                     ),
                   ),
-                  
                 ),
                 Divider(),
                 Text(
                   'Secteur d\'activité de votre entreprise actuelle',
-                  
                 ),
-                // FlutterFlowDropDown<String>(
-                //   options: [
-                //     'Agroalimentaire',
-                //     'Banque & Assurance',
-                //     'Bois - Papier - Carton - Imprimerie',
-                //     'BTP - Matériaux de construction',
-                //     'Chimie - Parachimie',
-                //     'Commerce - Négoce - Distribution',
-                //     'Edition - Communication - Multimédia',
-                //     'Électronique - Électricité',
-                //     'Études & Conseils',
-                //     'Industrie',
-                //     'Pharmaceutique',
-                //     'Informatique - Télécoms',
-                //     'Machines & Équipements',
-                //     'Automobile',
-                //     'Métallurgie',
-                //     'Services aux Entreprises',
-                //     'Textile - Habillement - Chaussure',
-                //     'Transports - Logistique'
-                //   ],
-                //   onChanged: (val) => setState(() => dropDownValue = val),
-                //   width: 500,
-                //   height: 50,
-                //   textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                //         fontFamily: 'Poppins',
-                //         color: Colors.black,
-                //       ),
-                //   hintText: 'Please select...',
-                //   fillColor: Colors.white,
-                //   elevation: 2,
-                //   borderColor: Colors.transparent,
-                //   borderWidth: 0,
-                //   borderRadius: 0,
-                //   margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
-                //   hidesUnderline: true,
-                // ),
+                DropdownButton<String>(
+                  value: _selectedsecteur,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedsecteur = value;
+                    });
+                  },
+                  hint: Text(
+                    'Sélectionner le secteur',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  // Hide the default underline
+                  underline: Container(),
+                  // set the color of the dropdown menu
+                  isExpanded: true,
+
+                  // The list of options
+                  items: _secteur
+                      .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                e,
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                ),
                 Divider(),
                 Text(
                   'Taille de votre entreprise actuelle',
                 ),
-                // FlutterFlowRadioButton(
-                //   options: [
-                //     'Micro-entreprise (moins de 10 personnes)',
-                //     'Petite entreprise (de 10 à 49 personnes)',
-                //     'Moyenne entreprise (de 50 à 249 personnes)',
-                //     'Grande entreprise (250 personnes occupées ou plus)'
-                //   ].toList(),
-                //   onChanged: (val) => setState(() => radioButtonValue3 = val),
-                //   optionHeight: 25,
-                //   textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                //         fontFamily: 'Poppins',
-                //         color: Colors.black,
-                //       ),
-                //   buttonPosition: RadioButtonPosition.left,
-                //   direction: Axis.vertical,
-                //   radioButtonColor: Colors.blue,
-                //   inactiveRadioButtonColor: Color(0x8A000000),
-                //   toggleable: false,
-                //   horizontalAlignment: WrapAlignment.start,
-                //   verticalAlignment: WrapCrossAlignment.start,
-                // ),
-                // Align(
-                //   alignment: AlignmentDirectional(0.75, 0),
-                //   child: FFButtonWidget(
-                //     onPressed: () {
-                //       print('Button pressed ...');
-                //     },
-                //     text: 'Soumettre',
-                //     options: FFButtonOptions(
-                //       width: 130,
-                //       height: 40,
-                //       color: FlutterFlowTheme.of(context).primaryColor,
-                //       textStyle:
-                //           FlutterFlowTheme.of(context).subtitle2.override(
-                //                 fontFamily: 'Poppins',
-                //                 color: Colors.white,
-                //               ),
-                //       borderSide: BorderSide(
-                //         color: Colors.transparent,
-                //         width: 1,
-                //       ),
-                //       borderRadius: BorderRadius.circular(8),
-                //     ),
-                //   ),
-                // ),
+                Row(
+                  children: <Widget>[
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        /// Just an example, but this makes sure, that since you set a fixed width like 300.0, on small screens this won't get too big. For example by setting a maxWidth constraint like this, its width will be 300.0, but at max as big as 1 / 3 of the screen width so it gets smaller on small screen sizes
+                        maxWidth: MediaQuery.of(context).size.width / 3,
+                      ),
+                      child: SizedBox(
+                        /// Enter your fixed width here, 300.0 ist just an example
+                        width: 300.0,
+                        child: ListTile(
+                          title: const Text(
+                              'Micro-entreprise (moins de 10 personnes)'),
+                          leading: Radio<TailleEntreprise>(
+                            value: TailleEntreprise.trespetite,
+                            groupValue: _tailleentreprise,
+                            onChanged: (TailleEntreprise? value) {
+                              setState(() {
+                                _tailleentreprise = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: const Text(
+                            'Petite entreprise (de 10 à 49 personnes)'),
+                        leading: Radio<TailleEntreprise>(
+                          value: TailleEntreprise.petite,
+                          groupValue: _tailleentreprise,
+                          onChanged: (TailleEntreprise? value) {
+                            setState(() {
+                              _tailleentreprise = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        /// Just an example, but this makes sure, that since you set a fixed width like 300.0, on small screens this won't get too big. For example by setting a maxWidth constraint like this, its width will be 300.0, but at max as big as 1 / 3 of the screen width so it gets smaller on small screen sizes
+                        maxWidth: MediaQuery.of(context).size.width / 3,
+                      ),
+                      child: SizedBox(
+                        /// Enter your fixed width here, 300.0 ist just an example
+                        width: 300.0,
+                        child: ListTile(
+                          title: const Text(
+                              'Moyenne entreprise (de 50 à 249 personnes)'),
+                          leading: Radio<TailleEntreprise>(
+                            value: TailleEntreprise.moyenne,
+                            groupValue: _tailleentreprise,
+                            onChanged: (TailleEntreprise? value) {
+                              setState(() {
+                                _tailleentreprise = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: const Text(
+                            'Grande entreprise (250 personnes occupées ou plus)'),
+                        leading: Radio<TailleEntreprise>(
+                          value: TailleEntreprise.grande,
+                          groupValue: _tailleentreprise,
+                          onChanged: (TailleEntreprise? value) {
+                            setState(() {
+                              _tailleentreprise = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Center(
+                  child: ElevatedButton(
+                      onPressed: () {}, child: const Icon(Icons.send)),
+                ),
               ],
             ),
           ),
