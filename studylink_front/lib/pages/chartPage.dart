@@ -66,7 +66,7 @@ class chartPage extends StatelessWidget {
             width: 600,
             height: 500,
             child: SfCartesianChart(
-                title: ChartTitle(text: 'Secteur A'),
+                title: ChartTitle(text: 'Secteur: Banque et Assurance'),
                 series: <ChartSeries>[
                   HistogramSeries<HistData, double>(
                       dataSource: histogramData,
