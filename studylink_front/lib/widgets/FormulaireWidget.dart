@@ -492,7 +492,12 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
                 ),
                 Center(
                   child: ElevatedButton(
-                      onPressed: () {}, child: const Icon(Icons.send)),
+                      onPressed: (() {
+                        print(textController1!.text);
+                        print(textController2!.text);
+                        print(textController3!.text);
+                      }),
+                      child: const Icon(Icons.send)),
                 ),
               ],
             ),
