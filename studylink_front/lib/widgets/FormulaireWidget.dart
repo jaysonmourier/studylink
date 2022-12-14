@@ -494,22 +494,52 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
                 Center(
                   child: ElevatedButton(
                       onPressed: (() {
-                        print(textController1!.text);
+                        final snackBar = SnackBar(
+                          content: const Text('Formulaire envoyé!'),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              // Some code to undo the change.
+                            },
+                          ),
+                        );
+                        final snackBarerreur = SnackBar(
+                          content: const Text('fdp tu te trompes!'),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              // Some code to undo the change.
+                            },
+                          ),
+                        );
+                        print(textController1);
                         print(textController2!.text);
                         print(textController3!.text);
                         print(_memeentreprise!.name);
                         print(_tailleentreprise!.name);
                         print(_dureepremierjob!.name);
                         print(_selectedsecteur!);
-                        createFormulaire(
-                          textController1!.text,
-                          _dureepremierjob!.name,
-                          textController2!.text,
-                          _memeentreprise!.name,
-                          textController3!.text,
-                          _selectedsecteur!,
-                          _tailleentreprise!.name,
-                        );
+                        if (textController1 == null ||
+                            textController2 == null ||
+                            textController3 == null ||
+                            _memeentreprise == null ||
+                            _tailleentreprise == null ||
+                            _dureepremierjob == null ||
+                            _selectedsecteur == null) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(snackBarerreur);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          createFormulaire(
+                            textController1!.text,
+                            _dureepremierjob!.name,
+                            textController2!.text,
+                            _memeentreprise!.name,
+                            textController3!.text,
+                            _selectedsecteur!,
+                            _tailleentreprise!.name,
+                          );
+                        }
                       }),
                       child: const Icon(Icons.send)),
                 ),
