@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:studylink_web/services/FormulaireService.dart';
 
 class FormulaireWidget extends StatefulWidget {
   const FormulaireWidget({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
   TailleEntreprise? _tailleentreprise = TailleEntreprise.trespetite;
   final List<String> _secteur = [
     'Agroalimentaire',
-    'Banque & Assurance',
+    'Banque et Assurance',
     'Bois - Papier - Carton - Imprimerie',
     'BTP - Matériaux de construction',
     'Chimie - Parachimie',
@@ -496,6 +497,19 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
                         print(textController1!.text);
                         print(textController2!.text);
                         print(textController3!.text);
+                        print(_memeentreprise!.name);
+                        print(_tailleentreprise!.name);
+                        print(_dureepremierjob!.name);
+                        print(_selectedsecteur!);
+                        createFormulaire(
+                          textController1!.text,
+                          _dureepremierjob!.name,
+                          textController2!.text,
+                          _memeentreprise!.name,
+                          textController3!.text,
+                          _selectedsecteur!,
+                          _tailleentreprise!.name,
+                        );
                       }),
                       child: const Icon(Icons.send)),
                 ),
