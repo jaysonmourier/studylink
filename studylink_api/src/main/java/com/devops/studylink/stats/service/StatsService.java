@@ -1,65 +1,78 @@
 package com.devops.studylink.stats.service;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.http.ResponseEntity;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import com.devops.studylink.Salaire.repository.SalaireRepository;
-import com.devops.studylink.Salaire.service.Salaire;
-import com.devops.studylink.Secteur.repository.SecteurRepository;
-import com.devops.studylink.User.repository.UserRepository;
-import com.devops.studylink.entreprise.repository.EntrepriseRepository;
+import com.devops.studylink.stats.repository.RecordRepository;
+import lombok.AllArgsConstructor;
 
-@Service
+@Service @AllArgsConstructor
 public class StatsService {
-    
-    private final UserRepository userRepository;
-    private final SecteurRepository secteurRepository;
-    private final EntrepriseRepository entrepriseRepository;
-    private final SalaireRepository salaireRepository;
-    
-    public StatsService(UserRepository userRepository, SecteurRepository secteurRepository, EntrepriseRepository entrepriseRepository, SalaireRepository salaireRepository) {
-        this.userRepository = userRepository;
-        this.secteurRepository = secteurRepository;
-        this.entrepriseRepository = entrepriseRepository;
-        this.salaireRepository = salaireRepository;
+
+    private final RecordRepository recordRepository;
+
+    public void saveRecord(Record record) {
+        recordRepository.saveRecord( record );
     }
 
-    public Double calculSalaireMoyen() {
-        List<Salaire> salaires = salaireRepository.getAll();
-        if(salaires.isEmpty()) return 0.0;
-        else {
-            Double salaireMoy = salaires.stream().map(s -> s.getGrossSalary()).mapToDouble(Double::doubleValue).sum();
-            return salaireMoy / salaires.size();
+    public Map<String, Float> barchartSecteurSalaire() {
+
+        Map<String, Float> result = new HashMap<>();
+        Map<String, List<Float>> histogram = histogramSecteurSalaire();
+        if (histogram != null && !histogram.isEmpty()) {
+            histogram.entrySet().forEach(
+                e -> {
+                    result.put( 
+                        e.getKey(),
+                        e.getValue().stream().reduce( 0f, (a,b) -> a+b )
+                    );
+                }
+            );
         }
+        return result;
+
     }
 
-    // Test Dataset for Front graph creation
-    public Map<String, Integer> getGraphSalaireSecteur() {
-        Map<String, Integer> result = new HashMap<>();
-        result.put( "Agroalimentaire", 41788 );
-        result.put( "Banque & Assurance", 68938 );
-        result.put( "Bois - Papier - Carton - Imprimerie", 60510 );
-        result.put( "BTP - Matériaux de construction", 49792 );
-        result.put( "Chimie - Parachimie", 59179 );
-        result.put( "Commerce - Négoce - Distribution", 55849 );
-        result.put( "Edition - Communication - Multimédia ", 64956 );
-        result.put( "Électronique - Électricité ", 66747 );
-        result.put( "Études & Conseils", 62067 );
-        result.put( "Industrie", 47680 );
-        result.put( "Pharmaceutique", 43439 );
-        result.put( "Informatique - Télécoms", 62665 );
-        result.put( "Machines & Équipements", 49522 );
-        result.put( "Automobile", 67622 );
-        result.put( "Métallurgie", 55089 );
-        result.put( "Plastique - Caoutchouc", 57170 );
-        result.put( "Services aux Entreprises", 38887 );
-        result.put( "Textile - Habillement - Chaussure", 60894 );
-        result.put( "Transports - Logistique", 36920 );
+    public float getSalaireMoyen() {
+        List<Record> records = recordRepository.getRecords();
+        if ( records == null || records.isEmpty() ) return 0f;
+        return records.stream().map(r -> r.getCurrentGrossSalary()).reduce(0f, (a,b) -> a + b) / records.size();
+    }
+
+    public Map<String, List<Float>> histogramSecteurSalaire() {
+
+        Map<String, List<Float>> result = new HashMap<>();
+        List<Record> records = recordRepository.getRecords();
+        if( records != null && !records.isEmpty() ) {
+            Set<String> domains = records.stream().map( r -> r.getCurrentCompanyDomain()).collect( Collectors.toSet() );
+            domains.forEach(
+                d -> {
+                    result.put(
+                        d,
+                        records.stream().filter( r -> r.getCurrentCompanyDomain().equals(d) ).map( r -> r.getCurrentGrossSalary() ).collect(Collectors.toList())
+                    );
+                }
+            );
+        }
         return result;
+
+    }
+
+    public Set<String> top3DomainsBySalary() {
+
+        Set<String> result = new HashSet<>();
+        Map<String, Float> data = barchartSecteurSalaire();
+
+        if(data != null && !data.isEmpty()) {
+            result = data.entrySet().stream().sorted(Map.Entry.comparingByValue()).map( d -> d.getKey() ).limit(3).collect(Collectors.toSet());
+        }
+        
+        return result;
+
     }    
 
 }
