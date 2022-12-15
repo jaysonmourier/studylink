@@ -7,6 +7,8 @@ class HistData {
 }
 
 class chartPage extends StatelessWidget {
+  const chartPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final List<HistData> histogramData = <HistData>[
