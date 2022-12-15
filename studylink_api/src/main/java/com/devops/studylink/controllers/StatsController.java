@@ -51,7 +51,7 @@ public class StatsController {
         return statsService.histogramSecteurSalaire();
     }
 
-    @PostMapping("/SaveRecord")
+    @PostMapping()
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<RecordDto> saveRecord( @RequestBody RecordDto record ) {
         statsService.saveRecord( Record.create( record ) );

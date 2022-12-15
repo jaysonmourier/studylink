@@ -11,20 +11,21 @@ Future<Formulaire> createFormulaire(
     String salaire_actuel,
     String secteur,
     String taille_entreprise) async {
-  print("${Env.HOST_API}:${Env.HOST_PORT}/formulaire");
+  print("${Env.HOST_API}:${Env.HOST_PORT}/stats");
   final response = await http.post(
-    Uri.parse("${Env.HOST_API}:${Env.HOST_PORT}/formulaire"),
+    Uri.parse("${Env.HOST_API}:${Env.HOST_PORT}/stats"),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8'
     },
-    body: jsonEncode(<String, String>{
-      'date_diplome': date_diplome,
-      'date_prm_emploi': date_prm_emploi,
-      'salaire_prm_emploi': salaire_prm_emploi,
-      'dans_entreprise': dans_entreprise,
-      'salaire_actuel': salaire_actuel,
-      'secteur': secteur,
-      'taille_entreprise': taille_entreprise,
+    body: jsonEncode(<String, Object>{
+      //'date_diplome': int.parse(date_diplome),
+      'firstJobDelay': 3, //int.parse(date_prm_emploi),
+      'firstGrossSalary': double.parse(salaire_prm_emploi),
+      'sameCompany': true,
+      'currentGrossSalary': double.parse(salaire_actuel),
+      'currentCompanyDomain': secteur,
+      'currentCompanySize': taille_entreprise,
+      'currentJobDelay': 3,
     }),
   );
   print(response.statusCode);
