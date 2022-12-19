@@ -17,7 +17,20 @@ Future<Formulaire> createFormulaire(
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8'
     },
-    body: jsonEncode(<String, Object>{
+    body: jsonEncode(<String, dynamic>{
+      //'date_diplome': int.parse(date_diplome),
+      'firstJobDelay': 3, //int.parse(date_prm_emploi),
+      'firstGrossSalary': double.parse(salaire_prm_emploi),
+      'sameCompany': true,
+      'currentGrossSalary': double.parse(salaire_actuel),
+      'currentCompanyDomain': secteur,
+      'currentCompanySize': taille_entreprise,
+      // 'currentJobDelay': 3,
+    }),
+  );
+
+  print(
+    jsonEncode(<String, dynamic>{
       //'date_diplome': int.parse(date_diplome),
       'firstJobDelay': 3, //int.parse(date_prm_emploi),
       'firstGrossSalary': double.parse(salaire_prm_emploi),
@@ -29,6 +42,7 @@ Future<Formulaire> createFormulaire(
     }),
   );
   print(response.statusCode);
+
   if (response.statusCode == 200) {
     return Formulaire.fromJson(jsonDecode(response.body));
   } else {
