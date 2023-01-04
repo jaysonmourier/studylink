@@ -25,7 +25,10 @@ class Studylink extends StatefulWidget {
 class StudylinkState extends State<Studylink> {
   final routeDelegate = BeamerDelegate(
     locationBuilder: RoutesLocationBuilder(routes: {
-      '/': (context, state, data) => const SLHomePage(),
+      '/': (context, state, data) => MaterialApp(
+        theme: ThemeData(fontFamily: 'Roboto'),
+        home: const SLHomePage(),
+      ),
       '/posts': (context, state, data) => const FormPage(),
       '/posts/:id': (context, state, data) {
         final id = state.pathParameters['id']!;
