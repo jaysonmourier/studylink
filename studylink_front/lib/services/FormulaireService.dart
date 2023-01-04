@@ -25,7 +25,7 @@ Future<Formulaire> createFormulaire(
       'currentGrossSalary': double.parse(salaire_actuel),
       'currentCompanyDomain': secteur,
       'currentCompanySize': taille_entreprise,
-      // 'currentJobDelay': 3,
+      'currentJobDelay': 3,
     }),
   );
 
