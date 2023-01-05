@@ -327,7 +327,10 @@ class AccountWidgetState extends State<AccountWidget> {
                             DateFormat('yyyy/MM/dd').format(selectedDate);
                         print(formattedDate.runtimeType);
                         print(formattedDate);
-                        if (textController1?.text == "") {
+                        if (textController1?.text == "" ||
+                            textController2?.text == "" ||
+                            textController3?.text == "" ||
+                            textController4?.text == "") {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(snackBarerreur);
                         } else {

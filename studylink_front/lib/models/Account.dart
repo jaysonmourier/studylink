@@ -2,7 +2,7 @@ class Account {
   final String id;
   final String name;
   final String lastname;
-  final String mail;
+  final String email;
   final String password;
   final String dateNaissance;
   final DateTime dateCreation;
@@ -10,7 +10,7 @@ class Account {
       {required this.name,
       required this.id,
       required this.lastname,
-      required this.mail,
+      required this.email,
       required this.password,
       required this.dateNaissance,
       required this.dateCreation});
@@ -20,7 +20,7 @@ class Account {
         id: json['id'],
         name: json['name'],
         lastname: json['lastname'],
-        mail: json['mail'],
+        email: json['email'],
         password: json['password'],
         dateNaissance: json['dateNaissance'],
         dateCreation: DateTime.parse(json['dateCreation']));

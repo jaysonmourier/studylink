@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import com.devops.studylink.User.dto.UserCreationDto;
 import com.devops.studylink.User.dto.UserDto;
@@ -46,27 +46,31 @@ public class UserController {
     
     @PostMapping("")
     @CrossOrigin(origins = "http://localhost:8080")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserCreationDto userDto) {
-        
-        return new ResponseEntity<UserDto> (
+    public ResponseEntity createUser(@RequestBody UserCreationDto userDto) {
+        try {
+            return new ResponseEntity<UserDto> (
                 new UserDto( userService.createUser( new User(userDto) ) ), HttpStatus.CREATED
             );
+        }
+        catch( Exception e ) { return ResponseEntity.badRequest().build(); }
     }
 
     @DeleteMapping("/{uuid}")
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity deleteUser(@PathVariable("uuid") String id) {
-        
-            userService.deteUser( UUID.fromString(id) );
-            return ResponseEntity.ok().build();
+        userService.deteUser( UUID.fromString(id) );
+        return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{uuid}")
     @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity updateUser( @PathVariable("uuid") String id, @RequestBody UserCreationDto userDto ) {
+        try {
             return ResponseEntity.ok(
                 new UserDto( userService.updateUser(UUID.fromString(id), new User(userDto)) )
             );
+        }
+        catch( Exception e ) { return ResponseEntity.badRequest().build(); }
     }
 
 }
