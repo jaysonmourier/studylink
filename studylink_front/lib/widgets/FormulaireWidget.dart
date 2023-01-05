@@ -504,7 +504,7 @@ class FormulaireWidgetState extends State<FormulaireWidget> {
                           ),
                         );
                         final snackBarerreur = SnackBar(
-                          content: const Text('fdp tu te trompes!'),
+                          content: const Text('erreur : valeur null'),
                           action: SnackBarAction(
                             label: 'Undo',
                             onPressed: () {
