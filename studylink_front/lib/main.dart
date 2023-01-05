@@ -27,7 +27,7 @@ class StudylinkState extends State<Studylink> {
     locationBuilder: RoutesLocationBuilder(routes: {
       '/': (context, state, data) => MaterialApp(
         theme: ThemeData(fontFamily: 'Roboto'),
-        home: const SLHomePage(),
+        home: const Scaffold(body: SLHomePage()),
       ),
       '/posts': (context, state, data) => const FormPage(),
       '/posts/:id': (context, state, data) {

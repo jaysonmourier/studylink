@@ -5,8 +5,7 @@ class HomePageMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(
@@ -28,11 +27,10 @@ class HomePageMobile extends StatelessWidget {
                       letterSpacing: 5,
                       fontSize: 25),),
                       Padding(padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0)),
-                      Text("Une plateforme de suivi universitaire dsq jdklsq jkdls jdkq l", style: TextStyle(color: Colors.white),)
+                      Text("Une plateforme d'analyse statistique et de suivi universitaire.", style: TextStyle(color: Colors.white),)
             ],
           )),
         ),
-      ),
-    );
+      );
   }
 }
