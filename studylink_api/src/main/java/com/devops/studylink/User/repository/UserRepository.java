@@ -25,7 +25,8 @@ public class UserRepository {
     }
 
     public User createUser(User u) {
-        return new User(userDao.save(new UserEntity(u)));
+        UserEntity tmp = new UserEntity(u); 
+        return new User(userDao.save( tmp ));
     }
 
     public void deleteUser(UUID id) {
