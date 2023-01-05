@@ -18,6 +18,7 @@ public class User {
     private String name;
     private String lastname;
     private String email;
+    private String password;
     private Date dateNaissance;
     private Date dateCreation;
 
@@ -26,15 +27,17 @@ public class User {
         this.name = e.getName();
         this.lastname = e.getLastname();
         this.email = e.getEmail();
+        this.password = e.getPassword();
         this.dateNaissance = e.getDateNaissance();
         this.dateCreation = e.getDateCreation();
     }
 
-    public User(UserCreationDto u){
+    public User(UserCreationDto u) throws Exception{
         setName(u.getName());
         setLastName(u.getLastname());
         setEmail(u.getEmail());
-        setDateNaissance(u.getDateNaissance());
+        this.setDateNaissance(u.getDateNaissance());
+        setPassword(u.getPassword());
         this.dateCreation = new Date();
     }
 
@@ -42,8 +45,8 @@ public class User {
         setName(update.getName());
         setLastName(update.getLastname());
         setEmail(update.getEmail());
+        setPassword(update.getPassword());
         setDateNaissance(update.getDateNaissance());
-
     }
 
     public void setName(String name){

@@ -44,6 +44,9 @@ public class UserEntity {
 
     @Column(name="dateCreation")
     private Date dateCreation;
+
+    @Column(name="password")
+    private String password;
     
     public UserEntity(User u) {
         this.name = u.getName();
@@ -51,6 +54,7 @@ public class UserEntity {
         this.email=u.getEmail();
         this.dateNaissance = u.getDateNaissance();
         this.dateCreation = u.getDateCreation();
+        this.password = u.getPassword();
     }
 
 }
