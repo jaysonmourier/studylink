@@ -5,7 +5,7 @@ import 'package:studylink_web/pages/SLHomePage.dart';
 import 'package:studylink_web/pages/chartPage.dart';
 import 'package:studylink_web/pages/formPage.dart';
 import 'package:studylink_web/pages/postPage.dart';
-
+import 'package:studylink_web/pages/formulairePage.dart';
 // widgets
 
 void main() {
@@ -37,6 +37,7 @@ class StudylinkState extends State<Studylink> {
             body: chartPage(),
           ),
       '/posts': (context, state, data) => const FormPage(),
+      '/formulaire': (context, state, data) => const FormulairePage(),
       '/posts/:id': (context, state, data) {
         final id = state.pathParameters['id']!;
         return BeamPage(
