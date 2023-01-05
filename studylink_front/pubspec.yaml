@@ -38,6 +38,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   beamer: ^1.5.3
+  fl_chart: ^0.55.2
+  syncfusion_flutter_charts: ^20.3.59
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +57,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto.ttf
+        - asset: fonts/Roboto-Black.ttf
+          weight: 700
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
