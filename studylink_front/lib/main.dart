@@ -26,8 +26,7 @@ class StudylinkState extends State<Studylink> {
   final routeDelegate = BeamerDelegate(
     locationBuilder: RoutesLocationBuilder(routes: {
       '/': (context, state, data) => MaterialApp(
-        theme: ThemeData(fontFamily: 'Roboto'),
-        home: const Scaffold(body: SLHomePage()),
+        home: Scaffold(body: SLHomePage()),
       ),
       '/posts': (context, state, data) => const FormPage(),
       '/formulaire': (context, state, data) => const FormulairePage(),

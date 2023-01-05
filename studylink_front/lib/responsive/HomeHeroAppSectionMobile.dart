@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studylink_web/pages/chartPage.dart';
 import 'package:studylink_web/pages/formPage.dart';
 
 class HomeHeroAppSectionMobile extends StatelessWidget {
@@ -10,7 +11,7 @@ class HomeHeroAppSectionMobile extends StatelessWidget {
       onPressed: () {
         debugPrint('Received click');
         Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => const FormPage()));
+          .push(MaterialPageRoute(builder: (_) => const chartPage()));
       },
       child: const Text('Access to the App'),
     ));
