@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:studylink_web/services/AccountService.dart';
 import 'dart:async';
+import 'package:intl/intl.dart';
 
 class AccountWidget extends StatefulWidget {
   const AccountWidget({Key? key}) : super(key: key);
@@ -320,7 +321,12 @@ class AccountWidgetState extends State<AccountWidget> {
                           ),
                         );
                         print(textController1?.text);
-                        print(selectedDate.toLocal());
+                        print(selectedDate.runtimeType);
+                        print(selectedDate);
+                        String formattedDate =
+                            DateFormat('yyyy/MM/dd').format(selectedDate);
+                        print(formattedDate.runtimeType);
+                        print(formattedDate);
                         if (textController1?.text == "") {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(snackBarerreur);
@@ -331,7 +337,7 @@ class AccountWidgetState extends State<AccountWidget> {
                               textController2!.text,
                               textController3!.text,
                               textController4!.text,
-                              selectedDate.toLocal());
+                              formattedDate);
                         }
                       }),
                       child: const Icon(Icons.send)),

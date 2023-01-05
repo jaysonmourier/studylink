@@ -4,7 +4,7 @@ class Account {
   final String lastname;
   final String mail;
   final String password;
-  final DateTime dateNaissance;
+  final String dateNaissance;
   final DateTime dateCreation;
   const Account(
       {required this.name,
@@ -22,7 +22,7 @@ class Account {
         lastname: json['lastname'],
         mail: json['mail'],
         password: json['password'],
-        dateNaissance: DateTime.parse(json['dateNaissance'].toString()),
+        dateNaissance: json['dateNaissance'],
         dateCreation: DateTime.parse(json['dateCreation']));
   }
 }
