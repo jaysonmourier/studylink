@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:studylink_web/pages/HomePage.dart';
+import 'package:studylink_web/pages/accountPage.dart';
 import 'package:studylink_web/pages/SLHomePage.dart';
 import 'package:studylink_web/pages/formPage.dart';
 import 'package:studylink_web/pages/postPage.dart';
@@ -30,6 +31,7 @@ class StudylinkState extends State<Studylink> {
       ),
       '/posts': (context, state, data) => const FormPage(),
       '/formulaire': (context, state, data) => const FormulairePage(),
+      '/account': (context, state, data) => const AccountPage(),
       '/posts/:id': (context, state, data) {
         final id = state.pathParameters['id']!;
         return BeamPage(

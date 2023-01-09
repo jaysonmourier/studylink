@@ -26,20 +26,22 @@ public class UserCreationDto {
     }
 
     public String getName() {
+        System.out.println("****name :: "+name);
         return name;
     }
 
     public String getLastname() {
+        System.out.println("****lestname :: "+lastname);
         return lastname;
     }
 
     public String getEmail() {
+        System.out.println("****mail :: "+email);
         return email;
     }
 
     public String getPassword() {
+        System.out.println("****Password :: "+password);
         return password;
     }
-
-
 }
