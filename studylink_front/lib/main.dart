@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:studylink_web/pages/HomePage.dart';
 import 'package:studylink_web/pages/accountPage.dart';
+import 'package:studylink_web/pages/SLHomePage.dart';
 import 'package:studylink_web/pages/formPage.dart';
 import 'package:studylink_web/pages/postPage.dart';
 import 'package:studylink_web/pages/formulairePage.dart';
@@ -25,7 +26,9 @@ class Studylink extends StatefulWidget {
 class StudylinkState extends State<Studylink> {
   final routeDelegate = BeamerDelegate(
     locationBuilder: RoutesLocationBuilder(routes: {
-      '/': (context, state, data) => const HomePage(),
+      '/': (context, state, data) => MaterialApp(
+        home: Scaffold(body: SLHomePage()),
+      ),
       '/posts': (context, state, data) => const FormPage(),
       '/formulaire': (context, state, data) => const FormulairePage(),
       '/account': (context, state, data) => const AccountPage(),

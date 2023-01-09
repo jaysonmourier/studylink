@@ -17,11 +17,11 @@ Future<Formulaire> createFormulaire(
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8'
     },
-    body: jsonEncode(<String, dynamic>{
+    body: jsonEncode(<String, Object>{
       //'date_diplome': int.parse(date_diplome),
       'firstJobDelay': 3, //int.parse(date_prm_emploi),
       'firstGrossSalary': double.parse(salaire_prm_emploi),
-      'sameCompany': true,
+      'sameCompany': dans_entreprise,
       'currentGrossSalary': double.parse(salaire_actuel),
       'currentCompanyDomain': secteur,
       'currentCompanySize': taille_entreprise,

@@ -2,7 +2,7 @@ class Formulaire {
   final int date_diplome;
   final int date_prm_emploi;
   final double salaire_prm_emploi;
-  final bool dans_entreprise;
+  final String dans_entreprise;
   final double salaire_actuel;
   final String taille_entreprise;
   final String secteur;

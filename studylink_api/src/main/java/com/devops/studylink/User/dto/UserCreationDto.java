@@ -22,7 +22,6 @@ public class UserCreationDto {
 
     public Date getDateNaissance() throws Exception {
         System.out.println("****DATE :: "+dateNaissance);
-        
         return new SimpleDateFormat("yyyy/MM/dd").parse(this.dateNaissance);
     }
 
@@ -45,5 +44,4 @@ public class UserCreationDto {
         System.out.println("****Password :: "+password);
         return password;
     }
-
 }
